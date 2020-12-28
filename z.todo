@@ -1,0 +1,15 @@
+Todo:
+  ☐ move project out of template make new repo and remove code
+  ☐ see if mdxs will work with SPA or if it needs a router like sapper
+  ☐ add postCSS and plugins for it
+  ☐ try to get rollup/svelte preproccessor working
+  ☐ add linting and configure
+
+Wishlist:
+  ☐ one moved rename and make proper header
+  ☐ add localstorage for viewed/check against value
+
+Archive:
+  ✔ make a durived store from api or deeper object structure maybe a json file. @done(20-12-24 07:11) @project(Todo)
+  ✔ figure out how to build better for deploy @done(20-12-24 12:24) @project(Todo)
+  ✔ add deploy script or learn gh action @done(20-12-24 12:24) @project(Todo)
