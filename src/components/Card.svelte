@@ -1,6 +1,6 @@
 <script>
   import { gsap } from 'gsap'
-  import { animate, killTimeline } from '../anime.js'
+  import { animate, killTimeline } from '../actions.js'
 
   //< props
   export let thumb
@@ -20,6 +20,7 @@
     const height = e.target.height
     const clientHeight = document.body.clientHeight
     const thumbnail = e.target.closest('.thumbnail')
+    const card = e.target.closest('.card')
     const caption = thumbnail.nextElementSibling
 
     if (isToggled) {
@@ -30,9 +31,8 @@
     }
 
     tl.add('start')
-      .set('.overlay', { height: `${clientHeight}px`, display: 'block' })
-      // .set(thumbnail, { opacity: 1 })
-      .set(thumbnail.parentElement, { zIndex: 420 })
+      .set(card.previousElementSibling, { height: `${clientHeight}px`, display: 'block' })
+      .set(card, { zIndex: 420 })
       .set(caption, { zIndex: 421 })
       .to(caption.children, { duration: 0.5, x: -360, stagger: 0.1 })
       .to(caption, { duration: 0.25, scale: 0.5, transformOrigin: '100% 0' })
@@ -56,7 +56,6 @@
 </script>
 
 <div class="overlay" />
-
 <figure class="card" use:animate={loadingAnimateOptions}>
   <div class="thumbnail" on:click={cardAnimate}>
     <img src={thumb} alt={title} loading="lazy" />
@@ -77,7 +76,7 @@
     min-width: 100%;
     display: none;
     background-color: var(--clr-bg);
-    opacity: 0.15;
+    opacity: 0.95;
     z-index: 10;
   }
 
