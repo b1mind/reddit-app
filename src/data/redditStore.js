@@ -1,7 +1,14 @@
 import { readable } from 'svelte/store'
 
+const redditGroup = 'ProgrammerHumor'
+
 const CORS = 'https://cors-anywhere.herokuapp.com/'
-const API = 'https://www.reddit.com/r/ProgrammerHumor/.json'
+const API = `https://www.reddit.com/r/${redditGroup}/.json`
+
+/* 
+const API = derived(redditGroup, ($redditGroup) => {
+  ;`https://www.reddit.com/r/${$redditGroup}/.json`
+}) */
 
 const isValidImageUrl = (url) => {
   if ((!url && typeof url !== 'string') || url.length === 0) return
@@ -12,15 +19,17 @@ const isValidImageUrl = (url) => {
 
 export const redditPostData = readable([], async (set) => {
   try {
-    const response = await fetch(`${CORS}${API}`)
+    // const response = await fetch(`${CORS}${API}`)
+    const response = await fetch(`${API}`)
     const results = await response.json()
     console.dir(results.data.children)
 
     const retrievedPosts = results.data.children.reduce((posts, { data }) => {
-      if (isValidImageUrl(data.url)) {
+      if (isValidImageUrl(data.thumbnail)) {
         const post = {
           id: data.id,
           img: data.url,
+          thumb: data.thumbnail,
           title: data.title,
           created: new Date(data.created * 1000).toDateString(),
           upVotes: data.ups,

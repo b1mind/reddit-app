@@ -2,19 +2,18 @@
   import { redditPostData } from './data/redditStore'
   import Card from './components/Card.svelte'
 
-  const user = 'World'
-  let count = 0
+  /* function overlay(e) {
+    const card = e.target.closest('.thumbnail')
+    if (!card) return
+    const overlay = document.querySelector('.overlay')
+    console.dir(overlay)
+    overlay.style.height = `${document.body.clientHeight}px`
+    overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block'
+  } */
 </script>
 
 <header>
-  <h1>This is Svelte-Pack!</h1>
-  <p>Hello {user}</p>
-
-  <button on:click={() => count++}>
-    Clicked
-    {count}
-    {count === 1 ? 'time' : 'times'}
-  </button>
+  <h1>/r/ProgrammingHumor</h1>
 </header>
 
 <main>
@@ -30,7 +29,6 @@
 
 <style lang="scss">
   //< style more
-
   $max: 1200px;
 
   header {
@@ -40,10 +38,8 @@
   }
 
   main {
-    position: relative;
     max-width: $max;
     margin: 10px auto;
-    // padding: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 360px));
     gap: 3rem;
