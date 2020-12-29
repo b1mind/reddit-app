@@ -19,6 +19,7 @@
 <main>
   {#each $redditPostData as post}
     <Card
+      id={post.id}
       thumb={post.img}
       ups={post.upVotes}
       author={post.author}
@@ -35,6 +36,9 @@
     max-width: $max;
     margin: 1rem auto;
     padding: 0.5rem 1rem;
+    h1 {
+      font-size: 1.5rem;
+    }
   }
 
   main {

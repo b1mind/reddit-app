@@ -25,14 +25,22 @@ export function killTimeline(timeline) {
 }
 
 export function copyImage(url) {
-  var img = document.createElement('img')
+  const img = document.createElement('img')
   img.src = url
   document.body.appendChild(img)
-  var r = document.createRange()
+  const r = document.createRange()
   r.setStartBefore(img)
   r.setEndAfter(img)
   r.selectNode(img)
-  var sel = window.getSelection()
+  const sel = window.getSelection()
   sel.addRange(r)
   document.execCommand('Copy')
+}
+
+export function storeInLocalStorage(item, keyAndValue, overWrite) {
+  let data = localStorage.getItem(item)
+  data = data ? JSON.parse(data) : []
+  if (overWrite && data.includes(keyAndValue)) return
+  data.push(keyAndValue)
+  localStorage.setItem(item, JSON.stringify(data))
 }

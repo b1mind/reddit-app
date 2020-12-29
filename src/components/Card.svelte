@@ -1,6 +1,6 @@
 <script>
   import { gsap } from 'gsap'
-  import { animate, killTimeline } from '../actions.js'
+  import { animate, killTimeline, storeInLocalStorage } from '../actions.js'
 
   //< props
   export let thumb
@@ -8,11 +8,15 @@
   export let date
   export let author
   export let ups
+  export let id
 
   const tl = gsap.timeline({})
   const loadingAnimateOptions = { type: 'from', duration: 1, autoAlpha: 0, y: 100 }
+
   let dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
   let isToggled
+  let lastSeen = JSON.parse(localStorage.getItem('hasSeen'))
+  let haveSeen = lastSeen ? lastSeen.includes(id) : false
 
   function cardAnimate(e) {
     if (tl.isActive()) return
@@ -22,6 +26,9 @@
     const thumbnail = e.target.closest('.thumbnail')
     const card = e.target.closest('.card')
     const caption = thumbnail.nextElementSibling
+    const id = card.dataset.id
+
+    storeInLocalStorage('hasSeen', id, true)
 
     if (isToggled) {
       caption.dataset.ups = dataUpsEmoji
@@ -50,19 +57,20 @@
         'start',
       )
 
+    haveSeen = true
     isToggled = true
     caption.dataset.ups = '🔗'
   }
 </script>
 
 <div class="overlay" />
-<figure class="card" use:animate={loadingAnimateOptions}>
+<figure class="card" use:animate={loadingAnimateOptions} data-id={id}>
   <div class="thumbnail" on:click={cardAnimate}>
     <img src={thumb} alt={title} loading="lazy" />
   </div>
 
   <figcaption data-ups={dataUpsEmoji}>
-    <h2>{title}</h2>
+    <h2 class:seen={haveSeen}>{title}</h2>
     <i>{author} // {date}</i>
   </figcaption>
 </figure>
@@ -136,12 +144,19 @@
     }
 
     h2 {
+      min-height: 3.5rem;
       margin: 0;
       padding: 0.5rem 6.5ch 0.5rem 0.5rem;
       font-size: 1rem;
-      background-color: var(--clr);
+      color: var(--clr-white);
+      background-color: var(--clr-dark);
       border-radius: 0 0 2rem 0;
     }
+  }
+
+  .seen {
+    color: var(--clr-two);
+    background-color: var(--clr);
   }
 
   //< the end is near
