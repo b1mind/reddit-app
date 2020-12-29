@@ -1,4 +1,5 @@
 Todo:
   ✔ move project out of template make new repo and remove code @done(20-12-27 21:53)
+  ☐ proper overlay with bind:click passed through component to App.svelte
   ☐ one moved rename and make proper header
-  ☐ add localstorage for viewed/check against value
+  ✔ add localstorage for viewed/check against value @done(20-12-29 00:28)
