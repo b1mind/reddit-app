@@ -1,6 +1,6 @@
 import { readable } from 'svelte/store'
 
-const redditGroup = 'ProgrammerHumor'
+export const redditGroup = 'ProgrammerHumor'
 
 const CORS = 'https://cors-anywhere.herokuapp.com/'
 const API = `https://www.reddit.com/r/${redditGroup}/.json`

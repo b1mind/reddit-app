@@ -1,5 +1,5 @@
 <script>
-  import { redditPostData } from './data/redditStore'
+  import { redditGroup, redditPostData } from './data/redditStore'
   import Card from './components/Card.svelte'
 
   /* function overlay(e) {
@@ -13,7 +13,7 @@
 </script>
 
 <header>
-  <h1>/r/ProgrammingHumor</h1>
+  <h1>/r/{redditGroup}</h1>
 </header>
 
 <main>
