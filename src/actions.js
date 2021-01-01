@@ -29,9 +29,11 @@ export function copyImage(url) {
   img.src = url
   document.body.appendChild(img)
   const r = document.createRange()
+
   r.setStartBefore(img)
   r.setEndAfter(img)
   r.selectNode(img)
+
   const sel = window.getSelection()
   sel.addRange(r)
   document.execCommand('Copy')
@@ -40,6 +42,7 @@ export function copyImage(url) {
 export function storeInLocalStorage(item, keyAndValue, overWrite) {
   let data = localStorage.getItem(item)
   data = data ? JSON.parse(data) : []
+
   if (overWrite && data.includes(keyAndValue)) return
   data.push(keyAndValue)
   localStorage.setItem(item, JSON.stringify(data))

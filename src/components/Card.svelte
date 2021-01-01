@@ -77,6 +77,7 @@
 
 <style type="text/scss">
   //< style like its 1989
+
   .overlay {
     position: absolute;
     top: 0;

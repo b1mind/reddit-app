@@ -2,6 +2,7 @@ import { readable } from 'svelte/store'
 
 export const redditGroup = 'ProgrammerHumor'
 
+//Todo derived fetch address
 const CORS = 'https://cors-anywhere.herokuapp.com/'
 const API = `https://www.reddit.com/r/${redditGroup}/.json`
 
@@ -17,6 +18,7 @@ const isValidImageUrl = (url) => {
   if (url.match(allowedExtensions)) return true
 }
 
+//Todo make fetch a function to call on?
 export const redditPostData = readable([], async (set) => {
   try {
     // const response = await fetch(`${CORS}${API}`)
