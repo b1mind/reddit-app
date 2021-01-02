@@ -9,12 +9,13 @@
   export let author
   export let ups
   export let id
+  export let hide = false
 
   const tl = gsap.timeline({})
   const loadingAnimateOptions = { type: 'from', duration: 1, autoAlpha: 0, y: 100 }
 
-  $: dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
   let isToggled
+  let dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
   let lastSeen = JSON.parse(localStorage.getItem('hasSeen'))
   let haveSeen = lastSeen ? lastSeen.includes(id) : false
 
@@ -64,7 +65,7 @@
 </script>
 
 <div class="overlay" />
-<figure class="card" use:animate={loadingAnimateOptions} data-id={id}>
+<figure class:hide class="card" use:animate={loadingAnimateOptions} data-id={id}>
   <div class="thumbnail" on:click={cardAnimate}>
     <img src={thumb} alt={title} loading="lazy" />
   </div>
@@ -158,6 +159,10 @@
   .seen {
     color: var(--clr-two);
     background-color: var(--clr);
+  }
+
+  .hide {
+    display: none;
   }
 
   //< the end is near

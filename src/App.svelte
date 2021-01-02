@@ -12,6 +12,7 @@
   } */
 
   let showSeen = false
+  let hide = false
   $: posts = $redditPostData
 
   function orderByUps() {
@@ -22,7 +23,7 @@
     posts = posts.sort((a, b) => b.created - a.created)
   }
 
-  //Todo Add hasSeen bool to postsObj
+  //Todo refactor and think of better way maybe
   function toggleSeen() {
     const seenPosts = document.querySelectorAll('.seen')
 
@@ -48,20 +49,23 @@
 
 <header>
   <h1>/r/{redditGroup}</h1>
+
+  <nav>
+    <button on:click={orderByUps}>ups</button>
+    <button on:click={orderByRecent}>recent</button>
+    <button on:click={toggleSeen}>{showSeen ? 'showSeen' : 'hideSeen'}</button>
+  </nav>
 </header>
 
-<button on:click={toggleSeen}>{showSeen ? 'showSeen' : 'hideSeen'}</button>
-<button on:click={orderByUps}>ups</button>
-<button on:click={orderByRecent}>recent</button>
-
 <main>
-  {#each posts as post}
+  {#each posts as post (post.id)}
     <Card
       id={post.id}
       thumb={post.img}
       ups={post.upVotes}
       author={post.author}
       title={post.title}
+      {hide}
       date={new Date(post.created * 1000).toDateString()} />
   {/each}
 </main>
@@ -75,6 +79,9 @@
     max-width: $max;
     margin: 1rem auto;
     padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     h1 {
       font-size: 1.5rem;
     }
