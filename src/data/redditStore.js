@@ -33,7 +33,7 @@ export const redditPostData = readable([], async (set) => {
           img: data.url,
           thumb: data.thumbnail,
           title: data.title,
-          created: new Date(data.created * 1000).toDateString(),
+          created: data.created,
           upVotes: data.ups,
           author: data.author,
         }

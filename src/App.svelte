@@ -1,7 +1,6 @@
 <script>
   import { redditGroup, redditPostData } from './data/redditStore'
   import Card from './components/Card.svelte'
-  import { afterUpdate, onMount } from 'svelte'
 
   /* function overlay(e) {
     const card = e.target.closest('.thumbnail')
@@ -15,16 +14,15 @@
   let showSeen = false
   $: posts = $redditPostData
 
-  function compare(a, b) {
-    if (a.upVotes < b.upVotes) return -1
-    if (a.upVotes > b.upVotes) return 1
-    return 0
-  }
-
   function orderByUps() {
-    posts = posts.sort(compare)
+    posts = posts.sort((a, b) => b.upVotes - a.upVotes)
   }
 
+  function orderByRecent() {
+    posts = posts.sort((a, b) => b.created - a.created)
+  }
+
+  //Todo Add hasSeen bool to postsObj
   function toggleSeen() {
     const seenPosts = document.querySelectorAll('.seen')
 
@@ -53,7 +51,8 @@
 </header>
 
 <button on:click={toggleSeen}>{showSeen ? 'showSeen' : 'hideSeen'}</button>
-<button on:click={orderByUps}>upVotes</button>
+<button on:click={orderByUps}>ups</button>
+<button on:click={orderByRecent}>recent</button>
 
 <main>
   {#each posts as post}
@@ -63,7 +62,7 @@
       ups={post.upVotes}
       author={post.author}
       title={post.title}
-      date={post.created} />
+      date={new Date(post.created * 1000).toDateString()} />
   {/each}
 </main>
 

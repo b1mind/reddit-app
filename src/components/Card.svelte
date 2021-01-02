@@ -13,7 +13,7 @@
   const tl = gsap.timeline({})
   const loadingAnimateOptions = { type: 'from', duration: 1, autoAlpha: 0, y: 100 }
 
-  let dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
+  $: dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
   let isToggled
   let lastSeen = JSON.parse(localStorage.getItem('hasSeen'))
   let haveSeen = lastSeen ? lastSeen.includes(id) : false
