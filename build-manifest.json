@@ -12,7 +12,7 @@
       "bytes": 321,
       "imports": []
     },
-    "web_modules/common/index-704260c5.js": {
+    "web_modules/common/index-4d8757bb.js": {
       "bytes": 9515,
       "imports": []
     },
@@ -20,7 +20,7 @@
       "bytes": 475,
       "imports": [
         {
-          "path": "web_modules/common/index-704260c5.js"
+          "path": "web_modules/common/index-4d8757bb.js"
         }
       ]
     },
@@ -28,12 +28,12 @@
       "bytes": 2080,
       "imports": [
         {
-          "path": "web_modules/common/index-704260c5.js"
+          "path": "web_modules/common/index-4d8757bb.js"
         }
       ]
     },
     "src/data/redditStore.js": {
-      "bytes": 1368,
+      "bytes": 1413,
       "imports": [
         {
           "path": "web_modules/svelte/store.js"
@@ -49,7 +49,7 @@
       "imports": []
     },
     "src/actions.js": {
-      "bytes": 1112,
+      "bytes": 1115,
       "imports": [
         {
           "path": "web_modules/gsap.js"
@@ -57,7 +57,7 @@
       ]
     },
     "src/components/Card.js": {
-      "bytes": 5464,
+      "bytes": 5684,
       "imports": [
         {
           "path": "src/components/Card.css"
@@ -74,7 +74,7 @@
       ]
     },
     "src/App.js": {
-      "bytes": 4379,
+      "bytes": 6591,
       "imports": [
         {
           "path": "src/App.css"
@@ -124,38 +124,38 @@
         "src/App.css": {
           "bytesInOutput": 0
         },
-        "web_modules/common/index-704260c5.js": {
-          "bytesInOutput": 3365
+        "web_modules/common/index-4d8757bb.js": {
+          "bytesInOutput": 3366
         },
         "web_modules/svelte/internal.js": {
           "bytesInOutput": 0
         },
         "web_modules/svelte/store.js": {
-          "bytesInOutput": 481
+          "bytesInOutput": 484
         },
         "src/data/redditStore.js": {
-          "bytesInOutput": 566
+          "bytesInOutput": 537
         },
         "src/components/Card.css": {
           "bytesInOutput": 0
         },
         "web_modules/gsap.js": {
-          "bytesInOutput": 58428
+          "bytesInOutput": 58455
         },
         "src/actions.js": {
           "bytesInOutput": 404
         },
         "src/components/Card.js": {
-          "bytesInOutput": 2204
+          "bytesInOutput": 2271
         },
         "src/App.js": {
-          "bytesInOutput": 1436
+          "bytesInOutput": 2290
         },
         "src/index.js": {
           "bytesInOutput": 122
         }
       },
-      "bytes": 67683
+      "bytes": 68606
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
