@@ -51,9 +51,9 @@
   <h1>/r/{redditGroup}</h1>
 
   <nav>
-    <button on:click={orderByUps}>ups</button>
-    <button on:click={orderByRecent}>recent</button>
-    <button on:click={toggleSeen}>{showSeen ? 'showSeen' : 'hideSeen'}</button>
+    <button on:click={orderByUps}>🔼</button>
+    <button on:click={orderByRecent}>📅</button>
+    <button on:click={toggleSeen}>{showSeen ? '👁' : '🙈'}</button>
   </nav>
 </header>
 
@@ -74,17 +74,42 @@
   //< style more
 
   $max: 1200px;
+  $min: 600px;
 
   header {
     max-width: $max;
     margin: 1rem auto;
     padding: 0.5rem 1rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+
     h1 {
       font-size: 1.5rem;
     }
+  }
+
+  nav {
+    padding: 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.25rem;
+    place-content: end;
+    border-radius: 1rem 0 0 0;
+    @media (max-width: $min) {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      width: max-content;
+      background-color: var(--clr-bg);
+      z-index: 9999;
+    }
+  }
+
+  button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
   }
 
   main {
