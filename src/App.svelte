@@ -11,6 +11,7 @@
     overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block'
   } */
 
+  let seenPosts = document.querySelectorAll('.seen')
   let showSeen = false
   let hide = false
   $: posts = $redditPostData
@@ -25,7 +26,7 @@
 
   //Todo refactor and think of better way maybe
   function toggleSeen() {
-    const seenPosts = document.querySelectorAll('.seen')
+    seenPosts = document.querySelectorAll('.seen')
 
     if (showSeen) {
       seenPosts.forEach((p) => {
@@ -68,13 +69,17 @@
       {hide}
       date={new Date(post.created * 1000).toDateString()} />
   {/each}
+
+  {#if seenPosts.length === posts.length && showSeen}
+    <h3>You have seen all posts</h3>
+  {/if}
 </main>
 
 <style lang="scss">
   //< style more
 
   $max: 1200px;
-  $min: 600px;
+  $min: 780px;
 
   header {
     max-width: $max;
@@ -96,6 +101,7 @@
     gap: 0.25rem;
     place-content: end;
     border-radius: 1rem 0 0 0;
+
     @media (max-width: $min) {
       position: fixed;
       right: 0;
@@ -119,6 +125,10 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 360px));
     gap: 3rem;
     place-content: center;
+
+    h3 {
+      text-align: center;
+    }
   }
 
   //< end me
