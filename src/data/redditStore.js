@@ -21,13 +21,13 @@ const isValidImageUrl = (url) => {
 //Todo make fetch a function to call on?
 export const redditPostData = readable([], async (set) => {
   try {
-    // const response = await fetch(`${CORS}${API}`)
-    const response = await fetch(`${API}`)
+    const response = await fetch(`${CORS}${API}`)
+    // const response = await fetch(`${API}`)
     const results = await response.json()
     console.dir(results.data.children)
 
     const retrievedPosts = results.data.children.reduce((posts, { data }) => {
-      if (isValidImageUrl(data.thumbnail)) {
+      if (isValidImageUrl(data.url)) {
         const post = {
           id: data.id,
           img: data.url,

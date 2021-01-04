@@ -1,6 +1,6 @@
 <script>
   import { gsap } from 'gsap'
-  import { animate, killTimeline, storeInLocalStorage } from '../actions.js'
+  import { killTimeline, storeInLocalStorage } from '../actions.js'
 
   //< props
   export let thumb
@@ -12,7 +12,6 @@
   export let hide = false
 
   const tl = gsap.timeline({})
-  const loadingAnimateOptions = { type: 'from', duration: 1, autoAlpha: 0, y: 100 }
 
   let isToggled
   let dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
@@ -65,7 +64,7 @@
 </script>
 
 <div class="overlay" />
-<figure class:hide class="card" use:animate={loadingAnimateOptions} data-id={id}>
+<figure class:hide class="card" data-id={id}>
   <div class="thumbnail" on:click={cardAnimate}>
     <img src={thumb} alt={title} loading="lazy" />
   </div>
@@ -105,6 +104,7 @@
     overflow: hidden;
     opacity: 0.2;
     cursor: zoom-in;
+
     img {
       width: 360px;
       object-fit: cover;

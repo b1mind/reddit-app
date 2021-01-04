@@ -1,17 +1,9 @@
 <script>
+  import { flip } from 'svelte/animate'
   import { redditGroup, redditPostData } from './data/redditStore'
   import Card from './components/Card.svelte'
 
-  /* function overlay(e) {
-    const card = e.target.closest('.thumbnail')
-    if (!card) return
-    const overlay = document.querySelector('.overlay')
-    console.dir(overlay)
-    overlay.style.height = `${document.body.clientHeight}px`
-    overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block'
-  } */
-
-  let seenPosts = document.querySelectorAll('.seen')
+  let seenPosts = []
   let showSeen = false
   let hide = false
   $: posts = $redditPostData
@@ -60,18 +52,20 @@
 
 <main>
   {#each posts as post (post.id)}
-    <Card
-      id={post.id}
-      thumb={post.img}
-      ups={post.upVotes}
-      author={post.author}
-      title={post.title}
-      {hide}
-      date={new Date(post.created * 1000).toDateString()} />
+    <div animate:flip={{ duration: 550 }} class="noClass">
+      <Card
+        id={post.id}
+        thumb={post.img}
+        ups={post.upVotes}
+        author={post.author}
+        title={post.title}
+        {hide}
+        date={new Date(post.created * 1000).toDateString()} />
+    </div>
   {/each}
 
   {#if seenPosts.length === posts.length && showSeen}
-    <h3>You have seen all posts</h3>
+    <div class="msg">You have seen all posts</div>
   {/if}
 </main>
 
@@ -125,10 +119,13 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 360px));
     gap: 3rem;
     place-content: center;
+  }
 
-    h3 {
-      text-align: center;
-    }
+  .msg {
+    grid-area: 1/2;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
   }
 
   //< end me
