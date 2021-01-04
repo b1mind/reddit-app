@@ -1,11 +1,14 @@
 Todo:
   ☐ style menu and buttons ( mobile bottom )
-  ☐ one moved rename and make proper header
+  ☐ loading icon or animation
+  ☐ add and test easing on animations
 
 WishList:
   ☐ proper overlay with bind:click passed through component to App.svelte
+  ☐ add scroll trigger with lazy load?
 
 Archive:
+  ✔ once moved rename and make proper header @done(21-01-03 21:57) @project(Todo)
   ✔ sort functions for haveSeen/recent/popular. @done(21-01-01 23:17) @project(Todo)
   ✔ move project out of template make new repo and remove code @done(20-12-27 21:53) @project(Todo)
   ✔ add localstorage for viewed/check against value @done(20-12-29 00:28) @project(Todo)
