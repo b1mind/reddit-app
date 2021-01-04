@@ -122,7 +122,7 @@
   }
 
   .msg {
-    grid-area: 1/2;
+    grid-area: 1 / span 4;
     font-size: 1.25rem;
     font-weight: 700;
     text-align: center;
