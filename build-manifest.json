@@ -12,23 +12,15 @@
       "bytes": 863,
       "imports": []
     },
-    "web_modules/common/index-450459a9.js": {
-      "bytes": 11590,
+    "web_modules/common/index-fdb22c11.js": {
+      "bytes": 11572,
       "imports": []
     },
     "web_modules/svelte/internal.js": {
       "bytes": 487,
       "imports": [
         {
-          "path": "web_modules/common/index-450459a9.js"
-        }
-      ]
-    },
-    "web_modules/svelte/animate.js": {
-      "bytes": 911,
-      "imports": [
-        {
-          "path": "web_modules/common/index-450459a9.js"
+          "path": "web_modules/common/index-fdb22c11.js"
         }
       ]
     },
@@ -36,7 +28,7 @@
       "bytes": 2080,
       "imports": [
         {
-          "path": "web_modules/common/index-450459a9.js"
+          "path": "web_modules/common/index-fdb22c11.js"
         }
       ]
     },
@@ -82,16 +74,13 @@
       ]
     },
     "src/App.js": {
-      "bytes": 7591,
+      "bytes": 7534,
       "imports": [
         {
           "path": "src/App.css"
         },
         {
           "path": "web_modules/svelte/internal.js"
-        },
-        {
-          "path": "web_modules/svelte/animate.js"
         },
         {
           "path": "src/data/redditStore.js"
@@ -135,7 +124,7 @@
         "src/App.css": {
           "bytesInOutput": 0
         },
-        "web_modules/common/index-450459a9.js": {
+        "web_modules/common/index-fdb22c11.js": {
           "bytesInOutput": 3897
         },
         "web_modules/svelte/internal.js": {
