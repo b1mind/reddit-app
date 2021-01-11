@@ -12,15 +12,15 @@
       "bytes": 863,
       "imports": []
     },
-    "web_modules/common/index-47424736.js": {
-      "bytes": 9370,
+    "web_modules/common/index-450459a9.js": {
+      "bytes": 11590,
       "imports": []
     },
     "web_modules/svelte/internal.js": {
-      "bytes": 452,
+      "bytes": 487,
       "imports": [
         {
-          "path": "web_modules/common/index-47424736.js"
+          "path": "web_modules/common/index-450459a9.js"
         }
       ]
     },
@@ -28,7 +28,7 @@
       "bytes": 911,
       "imports": [
         {
-          "path": "web_modules/common/index-47424736.js"
+          "path": "web_modules/common/index-450459a9.js"
         }
       ]
     },
@@ -36,7 +36,7 @@
       "bytes": 2080,
       "imports": [
         {
-          "path": "web_modules/common/index-47424736.js"
+          "path": "web_modules/common/index-450459a9.js"
         }
       ]
     },
@@ -82,7 +82,7 @@
       ]
     },
     "src/App.js": {
-      "bytes": 7746,
+      "bytes": 7591,
       "imports": [
         {
           "path": "src/App.css"
@@ -135,8 +135,8 @@
         "src/App.css": {
           "bytesInOutput": 0
         },
-        "web_modules/common/index-47424736.js": {
-          "bytesInOutput": 3317
+        "web_modules/common/index-450459a9.js": {
+          "bytesInOutput": 3897
         },
         "web_modules/svelte/internal.js": {
           "bytesInOutput": 0
@@ -160,13 +160,13 @@
           "bytesInOutput": 2203
         },
         "src/App.js": {
-          "bytesInOutput": 2783
+          "bytesInOutput": 2719
         },
         "src/index.js": {
           "bytesInOutput": 122
         }
       },
-      "bytes": 68832
+      "bytes": 69348
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
