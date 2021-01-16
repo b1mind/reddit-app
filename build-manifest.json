@@ -1,7 +1,7 @@
 {
   "inputs": {
     "global.css": {
-      "bytes": 382,
+      "bytes": 451,
       "imports": []
     },
     "__snowpack__/env.js": {
@@ -12,15 +12,23 @@
       "bytes": 863,
       "imports": []
     },
-    "web_modules/common/index-fdb22c11.js": {
-      "bytes": 11572,
+    "web_modules/common/index-0927a4fd.js": {
+      "bytes": 16937,
       "imports": []
     },
     "web_modules/svelte/internal.js": {
-      "bytes": 487,
+      "bytes": 537,
       "imports": [
         {
-          "path": "web_modules/common/index-fdb22c11.js"
+          "path": "web_modules/common/index-0927a4fd.js"
+        }
+      ]
+    },
+    "web_modules/svelte/animate.js": {
+      "bytes": 911,
+      "imports": [
+        {
+          "path": "web_modules/common/index-0927a4fd.js"
         }
       ]
     },
@@ -28,7 +36,7 @@
       "bytes": 2080,
       "imports": [
         {
-          "path": "web_modules/common/index-fdb22c11.js"
+          "path": "web_modules/common/index-0927a4fd.js"
         }
       ]
     },
@@ -41,7 +49,7 @@
       ]
     },
     "src/components/Card.css": {
-      "bytes": 1430,
+      "bytes": 1407,
       "imports": []
     },
     "web_modules/gsap.js": {
@@ -57,7 +65,7 @@
       ]
     },
     "src/components/Card.js": {
-      "bytes": 5386,
+      "bytes": 5930,
       "imports": [
         {
           "path": "src/components/Card.css"
@@ -74,13 +82,16 @@
       ]
     },
     "src/App.js": {
-      "bytes": 7534,
+      "bytes": 8059,
       "imports": [
         {
           "path": "src/App.css"
         },
         {
           "path": "web_modules/svelte/internal.js"
+        },
+        {
+          "path": "web_modules/svelte/animate.js"
         },
         {
           "path": "src/data/redditStore.js"
@@ -107,10 +118,10 @@
       "imports": [],
       "inputs": {
         "global.css": {
-          "bytesInOutput": 301
+          "bytesInOutput": 319
         }
       },
-      "bytes": 302
+      "bytes": 320
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.js": {
       "imports": [],
@@ -124,14 +135,17 @@
         "src/App.css": {
           "bytesInOutput": 0
         },
-        "web_modules/common/index-fdb22c11.js": {
-          "bytesInOutput": 3897
+        "web_modules/common/index-0927a4fd.js": {
+          "bytesInOutput": 6155
         },
         "web_modules/svelte/internal.js": {
           "bytesInOutput": 0
         },
+        "web_modules/svelte/animate.js": {
+          "bytesInOutput": 422
+        },
         "web_modules/svelte/store.js": {
-          "bytesInOutput": 484
+          "bytesInOutput": 481
         },
         "src/data/redditStore.js": {
           "bytesInOutput": 531
@@ -140,22 +154,22 @@
           "bytesInOutput": 0
         },
         "web_modules/gsap.js": {
-          "bytesInOutput": 58428
+          "bytesInOutput": 58441
         },
         "src/actions.js": {
           "bytesInOutput": 287
         },
         "src/components/Card.js": {
-          "bytesInOutput": 2203
+          "bytesInOutput": 2354
         },
         "src/App.js": {
-          "bytesInOutput": 2719
+          "bytesInOutput": 2884
         },
         "src/index.js": {
           "bytesInOutput": 122
         }
       },
-      "bytes": 69348
+      "bytes": 72354
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
@@ -164,10 +178,10 @@
           "bytesInOutput": 859
         },
         "src/components/Card.css": {
-          "bytesInOutput": 1422
+          "bytesInOutput": 1399
         }
       },
-      "bytes": 2282
+      "bytes": 2259
     }
   }
 }
