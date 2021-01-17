@@ -41,7 +41,7 @@
       ]
     },
     "src/data/redditStore.js": {
-      "bytes": 1280,
+      "bytes": 1327,
       "imports": [
         {
           "path": "web_modules/svelte/store.js"
@@ -82,7 +82,7 @@
       ]
     },
     "src/App.js": {
-      "bytes": 8044,
+      "bytes": 7882,
       "imports": [
         {
           "path": "src/App.css"
@@ -148,7 +148,7 @@
           "bytesInOutput": 481
         },
         "src/data/redditStore.js": {
-          "bytesInOutput": 531
+          "bytesInOutput": 579
         },
         "src/components/Card.css": {
           "bytesInOutput": 0
@@ -163,13 +163,13 @@
           "bytesInOutput": 2339
         },
         "src/App.js": {
-          "bytesInOutput": 2835
+          "bytesInOutput": 2812
         },
         "src/index.js": {
           "bytesInOutput": 122
         }
       },
-      "bytes": 72290
+      "bytes": 72314
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
