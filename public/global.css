@@ -6,6 +6,9 @@
   --clr-white: #f2f2f2;
   --clr-grey: #c0c0c0;
   --clr-bg: #1b1b1b;
+
+  /* for dark grey wolf theme */
+  --theme-v: #e0b96b; /* FFDC96 */
 }
 
 *,
