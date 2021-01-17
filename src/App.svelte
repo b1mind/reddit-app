@@ -3,8 +3,7 @@
   import { redditGroup, redditPostData } from './data/redditStore'
   import Card from './components/Card.svelte'
 
-  let seenPosts = []
-  let showSeen = false
+  let showSeen = true
   let hide = false
   $: posts = $redditPostData
 
@@ -16,26 +15,40 @@
     posts = posts.sort((a, b) => b.created - a.created)
   }
 
-  //Todo refactor and think of better way maybe
-  function toggleSeen() {
-    seenPosts = document.querySelectorAll('.seen')
-
+  //Todo refactored ... I think it works!
+  function orderBySeen() {
     if (showSeen) {
-      seenPosts.forEach((p) => {
-        const card = p.closest('.card')
+      let seenPosts = document.querySelectorAll('.seen')
+      seenPosts.forEach((post) => {
+        posts = posts.filter((key) => key.id !== post.dataset.id)
+      })
+
+      showSeen = false
+    } else {
+      posts = $redditPostData
+
+      showSeen = true
+    }
+  }
+
+  //old seen function
+  /*   function toggleSeen() {
+    if (showSeen) {
+      seenPosts.forEach((post) => {
+        const card = post.closest('.card')
         card.style = ''
       })
 
       showSeen = false
     } else {
-      seenPosts.forEach((p) => {
-        const card = p.closest('.card')
+      seenPosts.forEach((post) => {
+        const card = post.closest('.card')
         card.style.display = 'none'
       })
 
       showSeen = true
     }
-  }
+  } */
 
   //
 </script>
@@ -46,11 +59,14 @@
   <nav>
     <button on:click={orderByUps}>🔼</button>
     <button on:click={orderByRecent}>📅</button>
-    <button on:click={toggleSeen}>{showSeen ? '👁' : '🙈'}</button>
+    <button on:click={orderBySeen}>{!showSeen ? '👁' : '🙈'}</button>
   </nav>
 </header>
 
 <main>
+  <!--   {#each posts as post (post.id)}
+    <div animate:flip={{ duration: 550 }} class="noClass"> -->
+
   {#each posts as post (post.id)}
     <div animate:flip={{ duration: 550 }} class="noClass">
       <Card
@@ -64,7 +80,7 @@
     </div>
   {/each}
 
-  {#if seenPosts.length === posts.length && showSeen}
+  {#if posts.length === 0 && !showSeen}
     <div class="msg">You have seen all posts</div>
   {/if}
 </main>

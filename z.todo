@@ -1,9 +1,12 @@
 Todo:
-  ☐ style menu and buttons ( mobile bottom )
+  ☐ convert cout emjoi / copy button to element
+  ☐ add copy menu - link - image - save - goto orginal
   ☐ loading icon or animation
   ☐ add and test easing on animations
+  ✔ hasSeen working with keyed each @done(21-01-16 19:54)
 
 WishList:
+  ☐ style menu and buttons ( mobile bottom )
   ☐ proper overlay with bind:click passed through component to App.svelte
   ☐ add scroll trigger with lazy load?
 

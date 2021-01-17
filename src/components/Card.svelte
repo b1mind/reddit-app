@@ -18,31 +18,52 @@
   let lastSeen = JSON.parse(localStorage.getItem('hasSeen'))
   let haveSeen = lastSeen ? lastSeen.includes(id) : false
 
-  function cardAnimate(e) {
+  function cardClose(e) {
     if (tl.isActive()) return
+
+    if (isToggled) {
+      // caption.dataset.ups = dataUpsEmoji
+      killTimeline(tl)
+      isToggled = false
+      return
+    }
+  }
+
+  function cardAnimate(e) {
+    if (tl.isActive() || isToggled) return
 
     const height = e.target.height
     const clientHeight = document.body.clientHeight
     const thumbnail = e.target.closest('.thumbnail')
     const card = e.target.closest('.card')
-    const caption = thumbnail.nextElementSibling
-    const id = card.dataset.id
+    const captionChildren = thumbnail.nextElementSibling.children
+    const id = captionChildren[0].dataset.id
 
     storeInLocalStorage('hasSeen', id, true)
-
-    if (isToggled) {
-      caption.dataset.ups = dataUpsEmoji
-      killTimeline(tl)
-      isToggled = false
-      return
-    }
 
     tl.add('start')
       .set(card.previousElementSibling, { height: `${clientHeight}px`, display: 'block' })
       .set(card, { zIndex: 420 })
-      .set(caption, { zIndex: 421 })
-      .to(caption.children, { duration: 0.5, x: -360, stagger: 0.1 })
-      .to(caption, { duration: 0.25, scale: 0.5, transformOrigin: '100% 0' })
+      // .set(caption, { zIndex: 421 })
+      .to(
+        [captionChildren[0], captionChildren[1]],
+        {
+          duration: 0.5,
+          x: -360,
+          stagger: 0.1,
+        },
+        'start',
+      )
+      .to(
+        captionChildren[2],
+        {
+          duration: 0.5,
+          scale: 0.5,
+          transformOrigin: '100% 0',
+          ease: 'back.in(3)',
+        },
+        '<',
+      )
       .to(
         thumbnail,
         {
@@ -52,31 +73,31 @@
           height: height,
           opacity: 1,
           cursor: 'zoom-out',
-          zIndex: 420,
         },
         'start',
       )
 
     haveSeen = true
     isToggled = true
-    caption.dataset.ups = '🔗'
+    // caption.dataset.ups = '🔗'
   }
 </script>
 
-<div class="overlay" />
-<figure class:hide class="card" data-id={id}>
+<div class="overlay" on:click={cardClose} />
+<figure class:hide class="card">
   <div class="thumbnail" on:click={cardAnimate}>
     <img src={thumb} alt={title} loading="lazy" />
   </div>
 
   <figcaption data-ups={dataUpsEmoji}>
-    <h2 class:seen={haveSeen}>{title}</h2>
+    <h2 class:seen={haveSeen} data-id={id}>{title}</h2>
     <i>{author} // {date}</i>
+    <div class="data-ups">{dataUpsEmoji}</div>
   </figcaption>
 </figure>
 
 <style type="text/scss">
-  //< style like its 1989
+  //< style like its 1999
 
   .overlay {
     position: absolute;
@@ -119,8 +140,8 @@
     overflow: hidden;
     pointer-events: inherit;
 
-    &::after {
-      content: attr(data-ups) '';
+    .data-ups {
+      // content: attr(data-ups) '';
       position: absolute;
       right: 0;
       top: 0;
