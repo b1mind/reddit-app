@@ -1,7 +1,7 @@
 {
   "inputs": {
     "global.css": {
-      "bytes": 451,
+      "bytes": 506,
       "imports": []
     },
     "__snowpack__/env.js": {
@@ -49,7 +49,7 @@
       ]
     },
     "src/components/Card.css": {
-      "bytes": 1407,
+      "bytes": 1442,
       "imports": []
     },
     "web_modules/gsap.js": {
@@ -65,7 +65,7 @@
       ]
     },
     "src/components/Card.js": {
-      "bytes": 5949,
+      "bytes": 6011,
       "imports": [
         {
           "path": "src/components/Card.css"
@@ -82,7 +82,7 @@
       ]
     },
     "src/App.js": {
-      "bytes": 7885,
+      "bytes": 8031,
       "imports": [
         {
           "path": "src/App.css"
@@ -118,10 +118,10 @@
       "imports": [],
       "inputs": {
         "global.css": {
-          "bytesInOutput": 319
+          "bytesInOutput": 366
         }
       },
-      "bytes": 320
+      "bytes": 367
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.js": {
       "imports": [],
@@ -160,16 +160,16 @@
           "bytesInOutput": 287
         },
         "src/components/Card.js": {
-          "bytesInOutput": 2339
+          "bytesInOutput": 2346
         },
         "src/App.js": {
-          "bytesInOutput": 2812
+          "bytesInOutput": 2848
         },
         "src/index.js": {
           "bytesInOutput": 122
         }
       },
-      "bytes": 72314
+      "bytes": 72357
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
@@ -178,10 +178,10 @@
           "bytesInOutput": 859
         },
         "src/components/Card.css": {
-          "bytesInOutput": 1399
+          "bytesInOutput": 1434
         }
       },
-      "bytes": 2259
+      "bytes": 2294
     }
   }
 }
