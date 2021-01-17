@@ -3,7 +3,7 @@
   import { killTimeline, storeInLocalStorage, copyUrl } from '../actions.js'
 
   //< props
-  export let thumb
+  export let imgUrl
   export let title
   export let date
   export let author
@@ -11,7 +11,7 @@
   export let id
   export let hide = false
 
-  const tl = gsap.timeline({})
+  const tlAnimate = gsap.timeline({})
 
   let isToggled
   let dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
@@ -22,54 +22,57 @@
   let haveSeen = lastSeen ? lastSeen.includes(id) : false
 
   //todo: make a exit animation or just kill it?
-  function cardClose(e) {
-    if (tl.isActive()) return
+  function cardClose() {
+    if (tlAnimate.isActive()) return
 
     if (isToggled) {
       btnIcon = dataUpsEmoji
-      killTimeline(tl)
+
+      killTimeline(tlAnimate)
+      // killTimeline(tlCopy)
       isToggled = false
       return
     }
   }
 
   function cardAnimate(e) {
-    if (tl.isActive() || isToggled) return
+    if (tlAnimate.isActive() || isToggled) return
 
     const height = e.target.height
     const clientHeight = document.body.clientHeight
     const thumbnail = e.target.closest('.thumbnail')
     const card = e.target.closest('.card')
-    const captionChildren = thumbnail.nextElementSibling.children
+    const captionChildren = card.querySelector('figcaption').children
     const id = captionChildren[0].dataset.id
     const btn = captionChildren[2]
-    console.log(btn)
+    console.dir(captionChildren)
 
     storeInLocalStorage('hasSeen', id, true)
 
-    tl.add('start')
+    //> start timeline
+    tlAnimate
+      .add('start')
       .set(card.previousElementSibling, { height: `${clientHeight}px`, display: 'block' })
       .set(card, { zIndex: 420 })
-      // .set(caption, { zIndex: 421 })
+
       .to(
         [captionChildren[0], captionChildren[1]],
-        {
-          duration: 0.5,
-          x: -360,
-          stagger: 0.1,
-        },
+        { duration: 0.5, x: -360, stagger: 0.1, ease: 'power3.in' },
         'start',
       )
+
       .to(
         btn,
         {
           duration: 0.5,
           scale: 0.5,
+          borderRadius: '0 0 0 2rem',
           transformOrigin: '100% 0',
           ease: 'back.in(3)',
         },
         '<',
       )
+
       .to(
         thumbnail,
         {
@@ -88,19 +91,40 @@
     btnIcon = '🔗'
   }
 
+  const tlCopy = gsap.timeline({
+    defaults: {
+      duration: 0.5,
+    },
+  })
+
+  function copyImgUrl(e) {
+    console.dir(e.target)
+    let { parentElement: caption } = e.target
+    console.log(caption)
+
+    if (!isToggled) return
+    copyUrl(imgUrl)
+    tlCopy
+      .to(e.target.nextElementSibling, { x: -71 })
+      .to(e.target, { x: -71 }, '<')
+      .to(e.target, { x: 0 }, '+=0.25')
+      .to(e.target.nextElementSibling, { x: 0 }, '<')
+  }
+
   //end the fun
 </script>
 
 <div class="overlay" on:click={cardClose} />
 <figure class:hide class="card">
   <div class="thumbnail" on:click={cardAnimate}>
-    <img src={thumb} alt={title} loading="lazy" />
+    <img src={imgUrl} alt={title} loading="lazy" />
   </div>
 
   <figcaption data-ups={dataUpsEmoji}>
     <h2 class:seen={haveSeen} data-id={id}>{title}</h2>
     <i>{author} // {date}</i>
-    <button class="data-ups" on:click={copyUrl(thumb)}>{btnIcon}</button>
+    <button class="data-ups" on:click={copyImgUrl}>{btnIcon}</button>
+    <div class="copy-text"><span>Copied</span></div>
   </figcaption>
 </figure>
 
@@ -163,6 +187,7 @@
       background-color: var(--clr-two-dark);
       border-color: transparent;
       border-radius: 2rem 0 2rem 0;
+      z-index: 5;
       // cursor: alias;
     }
 
@@ -180,10 +205,27 @@
       min-height: 3.5rem;
       margin: 0;
       padding: 0.5rem 6.5ch 0.5rem 0.5rem;
-      font-size: 1rem;
       color: var(--clr-white);
+      font-size: 1rem;
+      line-height: 1rem;
       background-color: var(--clr-dark);
       border-radius: 0 0 2rem 0;
+    }
+  }
+
+  .copy-text {
+    position: absolute;
+    top: 0;
+    right: -71px;
+    height: 25px;
+    padding-left: 30px;
+    background-color: var(--clr-dark);
+    border-radius: 2rem 0 0 2rem;
+    span {
+      width: max-content;
+      padding: 0 10px;
+      color: var(--clr-white);
+      background-color: var(--clr-bg);
     }
   }
 

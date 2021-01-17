@@ -55,16 +55,16 @@
   <!-- //Todo: Flip refactor: look into using gsap.Flip -->
 
   {#each posts as post (post.id)}
-    <div animate:flip={{ duration: 550 }} class="noClass">
+    <article animate:flip={{ duration: 550 }} class="noClass">
       <Card
         id={post.id}
-        thumb={post.img}
+        imgUrl={post.img}
         ups={post.upVotes}
         author={post.author}
         title={post.title}
         {hide}
         date={new Date(post.created * 1000).toDateString()} />
-    </div>
+    </article>
   {/each}
 
   {#if posts.length === 0 && !showSeen}
