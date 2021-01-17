@@ -82,7 +82,7 @@
       ]
     },
     "src/App.js": {
-      "bytes": 8038,
+      "bytes": 8037,
       "imports": [
         {
           "path": "src/App.css"
