@@ -1,6 +1,6 @@
 <script>
   import { gsap } from 'gsap'
-  import { killTimeline, storeInLocalStorage } from '../actions.js'
+  import { killTimeline, storeInLocalStorage, copyUrl } from '../actions.js'
 
   //< props
   export let thumb
@@ -15,14 +15,18 @@
 
   let isToggled
   let dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
+  let btnIcon = dataUpsEmoji
+
+  //todo: localStorage and seen logic out of component
   let lastSeen = JSON.parse(localStorage.getItem('hasSeen'))
   let haveSeen = lastSeen ? lastSeen.includes(id) : false
 
+  //todo: make a exit animation or just kill it?
   function cardClose(e) {
     if (tl.isActive()) return
 
     if (isToggled) {
-      // caption.dataset.ups = dataUpsEmoji
+      btnIcon = dataUpsEmoji
       killTimeline(tl)
       isToggled = false
       return
@@ -38,6 +42,8 @@
     const card = e.target.closest('.card')
     const captionChildren = thumbnail.nextElementSibling.children
     const id = captionChildren[0].dataset.id
+    const btn = captionChildren[2]
+    console.log(btn)
 
     storeInLocalStorage('hasSeen', id, true)
 
@@ -55,7 +61,7 @@
         'start',
       )
       .to(
-        captionChildren[2],
+        btn,
         {
           duration: 0.5,
           scale: 0.5,
@@ -67,20 +73,22 @@
       .to(
         thumbnail,
         {
-          duration: 0.25,
+          duration: 0.2,
           position: 'absolute',
           duration: 1,
           height: height,
           opacity: 1,
-          cursor: 'zoom-out',
+          cursor: 'inherit',
         },
         'start',
       )
 
     haveSeen = true
     isToggled = true
-    // caption.dataset.ups = '🔗'
+    btnIcon = '🔗'
   }
+
+  //end the fun
 </script>
 
 <div class="overlay" on:click={cardClose} />
@@ -92,7 +100,7 @@
   <figcaption data-ups={dataUpsEmoji}>
     <h2 class:seen={haveSeen} data-id={id}>{title}</h2>
     <i>{author} // {date}</i>
-    <div class="data-ups">{dataUpsEmoji}</div>
+    <button class="data-ups" on:click={copyUrl(thumb)}>{btnIcon}</button>
   </figcaption>
 </figure>
 
@@ -108,6 +116,7 @@
     background-color: var(--clr-bg);
     opacity: 0.95;
     z-index: 10;
+    cursor: pointer;
   }
 
   figure {
@@ -152,6 +161,7 @@
       color: var(--clr-white);
       font-size: 1.5rem;
       background-color: var(--clr-two-dark);
+      border-color: transparent;
       border-radius: 2rem 0 2rem 0;
       // cursor: alias;
     }
