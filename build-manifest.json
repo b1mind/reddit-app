@@ -65,7 +65,7 @@
       ]
     },
     "src/components/Card.js": {
-      "bytes": 5901,
+      "bytes": 5949,
       "imports": [
         {
           "path": "src/components/Card.css"
@@ -82,7 +82,7 @@
       ]
     },
     "src/App.js": {
-      "bytes": 7882,
+      "bytes": 7885,
       "imports": [
         {
           "path": "src/App.css"
