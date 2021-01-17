@@ -4,51 +4,39 @@
   import Card from './components/Card.svelte'
 
   let showSeen = true
+  let orderUps = true
   let hide = false
+  let seenPosts = []
   $: posts = $redditPostData
 
   function orderByUps() {
-    posts = posts.sort((a, b) => b.upVotes - a.upVotes)
+    if (orderUps) {
+      posts = posts.sort((a, b) => b.upVotes - a.upVotes)
+    } else {
+      posts = posts.sort((a, b) => a.upVotes - b.upVotes)
+    }
+
+    orderUps = !orderUps
   }
 
   function orderByRecent() {
     posts = posts.sort((a, b) => b.created - a.created)
   }
 
-  //Todo refactored ... I think it works!
-  function orderBySeen() {
+  //note: seen refactored ... it fucking it works '💪'!
+  function toggleSeen() {
+    seenPosts = document.querySelectorAll('.seen')
+
     if (showSeen) {
-      let seenPosts = document.querySelectorAll('.seen')
       seenPosts.forEach((post) => {
         posts = posts.filter((key) => key.id !== post.dataset.id)
       })
-
-      showSeen = false
     } else {
       posts = $redditPostData
-
-      showSeen = true
     }
+
+    showSeen = !showSeen
   }
-
-  //old seen function
-  /*   function toggleSeen() {
-    if (showSeen) {
-      seenPosts.forEach((post) => {
-        const card = post.closest('.card')
-        card.style = ''
-      })
-
-      showSeen = false
-    } else {
-      seenPosts.forEach((post) => {
-        const card = post.closest('.card')
-        card.style.display = 'none'
-      })
-
-      showSeen = true
-    }
-  } */
 
   //
 </script>
@@ -59,13 +47,12 @@
   <nav>
     <button on:click={orderByUps}>🔼</button>
     <button on:click={orderByRecent}>📅</button>
-    <button on:click={orderBySeen}>{!showSeen ? '👁' : '🙈'}</button>
+    <button on:click={toggleSeen}>{!showSeen ? '👁' : '🙈'}</button>
   </nav>
 </header>
 
 <main>
-  <!--   {#each posts as post (post.id)}
-    <div animate:flip={{ duration: 550 }} class="noClass"> -->
+  <!-- //Todo: Flip refactor: look into using gsap.Flip -->
 
   {#each posts as post (post.id)}
     <div animate:flip={{ duration: 550 }} class="noClass">
