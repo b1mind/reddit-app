@@ -69,6 +69,8 @@
 
   {#if posts.length === 0 && !showSeen}
     <div class="msg">You have seen all posts</div>
+  {:else if posts.length === 0}
+    <div class="loading" />
   {/if}
 </main>
 
@@ -129,6 +131,21 @@
     font-size: 1.25rem;
     font-weight: 700;
     text-align: center;
+  }
+
+  .loading {
+    width: 100px;
+    height: 100px;
+    border: 10px dotted var(--clr-dark);
+    border-radius: 50%;
+    transform-origin: ' top';
+    animation: rotate 0.5s linear infinite;
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   //< end me

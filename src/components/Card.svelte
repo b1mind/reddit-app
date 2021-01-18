@@ -11,8 +11,6 @@
   export let id
   export let hide = false
 
-  const tlAnimate = gsap.timeline({})
-
   let isToggled
   let dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
   let btnIcon = dataUpsEmoji
@@ -23,7 +21,7 @@
 
   //todo: make a exit animation or just kill it?
   function cardClose() {
-    if (tlAnimate.isActive()) return
+    if (tlAnimate.isActive() || tlCopy.isActive()) return
 
     if (isToggled) {
       btnIcon = dataUpsEmoji
@@ -35,14 +33,21 @@
     }
   }
 
+  const tlAnimate = gsap.timeline({
+    defaults: {
+      duration: 0.5,
+    },
+  })
+
   function cardAnimate(e) {
     if (tlAnimate.isActive() || isToggled) return
 
-    const height = e.target.height
+    const { height, width = '360' } = e.target
     const clientHeight = document.body.clientHeight
     const thumbnail = e.target.closest('.thumbnail')
     const card = e.target.closest('.card')
-    const captionChildren = card.querySelector('figcaption').children
+    const caption = card.querySelector('figcaption')
+    const captionChildren = caption.children
     const id = captionChildren[0].dataset.id
     const btn = captionChildren[2]
     console.dir(captionChildren)
@@ -57,18 +62,18 @@
 
       .to(
         [captionChildren[0], captionChildren[1]],
-        { duration: 0.5, x: -360, stagger: 0.1, ease: 'power3.in' },
+        { x: `-${width}px`, stagger: 0.1, ease: 'power2.in' },
         'start',
       )
 
+      // .to(caption, { backgroundColor: 'black', height: `${height}px` }, '>')
       .to(
         btn,
         {
-          duration: 0.5,
           scale: 0.5,
           borderRadius: '0 0 0 2rem',
           transformOrigin: '100% 0',
-          ease: 'back.in(3)',
+          ease: 'back.in(1.7)',
         },
         '<',
       )
@@ -82,6 +87,7 @@
           height: height,
           opacity: 1,
           cursor: 'inherit',
+          ease: 'back.in(1.7)',
         },
         'start',
       )
@@ -173,24 +179,6 @@
     overflow: hidden;
     pointer-events: inherit;
 
-    .data-ups {
-      // content: attr(data-ups) '';
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 3.5rem;
-      height: 3.5rem;
-      display: grid;
-      place-items: center;
-      color: var(--clr-white);
-      font-size: 1.5rem;
-      background-color: var(--clr-two-dark);
-      border-color: transparent;
-      border-radius: 2rem 0 2rem 0;
-      z-index: 5;
-      // cursor: alias;
-    }
-
     i {
       width: max-content;
       padding: 0.25rem 0.75rem;
@@ -203,6 +191,7 @@
 
     h2 {
       min-height: 3.5rem;
+      height: 100%;
       margin: 0;
       padding: 0.5rem 6.5ch 0.5rem 0.5rem;
       color: var(--clr-white);
@@ -213,11 +202,30 @@
     }
   }
 
+  .data-ups {
+    // content: attr(data-ups) '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: grid;
+    place-items: center;
+    color: var(--clr-white);
+    font-size: 1.5rem;
+    background-color: var(--clr-two-dark);
+    border-color: transparent;
+    border-radius: 2rem 0 2rem 0;
+    box-shadow: 1px 1px 1px 0.25px black;
+    z-index: 5;
+    // cursor: alias;
+  }
+
   .copy-text {
     position: absolute;
     top: 0;
     right: -71px;
-    height: 25px;
+    height: max-content;
     padding-left: 30px;
     background-color: var(--clr-dark);
     border-radius: 2rem 0 0 2rem;
