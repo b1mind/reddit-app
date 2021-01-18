@@ -9,26 +9,33 @@
       "imports": []
     },
     "src/App.css": {
-      "bytes": 1115,
+      "bytes": 1152,
       "imports": []
     },
-    "web_modules/common/index-0927a4fd.js": {
-      "bytes": 16937,
+    "web_modules/common/index-4523d670.js": {
+      "bytes": 19282,
       "imports": []
     },
     "web_modules/svelte/internal.js": {
-      "bytes": 537,
+      "bytes": 590,
       "imports": [
         {
-          "path": "web_modules/common/index-0927a4fd.js"
+          "path": "web_modules/common/index-4523d670.js"
         }
       ]
     },
+    "web_modules/common/index-78b2aaa2.js": {
+      "bytes": 103,
+      "imports": []
+    },
     "web_modules/svelte/animate.js": {
-      "bytes": 911,
+      "bytes": 895,
       "imports": [
         {
-          "path": "web_modules/common/index-0927a4fd.js"
+          "path": "web_modules/common/index-4523d670.js"
+        },
+        {
+          "path": "web_modules/common/index-78b2aaa2.js"
         }
       ]
     },
@@ -36,7 +43,7 @@
       "bytes": 2080,
       "imports": [
         {
-          "path": "web_modules/common/index-0927a4fd.js"
+          "path": "web_modules/common/index-4523d670.js"
         }
       ]
     },
@@ -65,7 +72,7 @@
       ]
     },
     "src/components/Card.js": {
-      "bytes": 7222,
+      "bytes": 7272,
       "imports": [
         {
           "path": "src/components/Card.css"
@@ -81,8 +88,19 @@
         }
       ]
     },
+    "web_modules/svelte/transition.js": {
+      "bytes": 889,
+      "imports": [
+        {
+          "path": "web_modules/common/index-4523d670.js"
+        },
+        {
+          "path": "web_modules/common/index-78b2aaa2.js"
+        }
+      ]
+    },
     "src/App.js": {
-      "bytes": 8571,
+      "bytes": 9000,
       "imports": [
         {
           "path": "src/App.css"
@@ -98,6 +116,9 @@
         },
         {
           "path": "src/components/Card.js"
+        },
+        {
+          "path": "web_modules/svelte/transition.js"
         }
       ]
     },
@@ -135,14 +156,17 @@
         "src/App.css": {
           "bytesInOutput": 0
         },
-        "web_modules/common/index-0927a4fd.js": {
-          "bytesInOutput": 6152
+        "web_modules/common/index-4523d670.js": {
+          "bytesInOutput": 6883
         },
         "web_modules/svelte/internal.js": {
           "bytesInOutput": 0
         },
+        "web_modules/common/index-78b2aaa2.js": {
+          "bytesInOutput": 40
+        },
         "web_modules/svelte/animate.js": {
-          "bytesInOutput": 422
+          "bytesInOutput": 382
         },
         "web_modules/svelte/store.js": {
           "bytesInOutput": 481
@@ -160,28 +184,31 @@
           "bytesInOutput": 526
         },
         "src/components/Card.js": {
-          "bytesInOutput": 2961
+          "bytesInOutput": 2987
+        },
+        "web_modules/svelte/transition.js": {
+          "bytesInOutput": 150
         },
         "src/App.js": {
-          "bytesInOutput": 3015
+          "bytesInOutput": 3077
         },
         "src/index.js": {
           "bytesInOutput": 122
         }
       },
-      "bytes": 73403
+      "bytes": 74372
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
       "inputs": {
         "src/App.css": {
-          "bytesInOutput": 1110
+          "bytesInOutput": 1147
         },
         "src/components/Card.css": {
           "bytesInOutput": 1830
         }
       },
-      "bytes": 2941
+      "bytes": 2978
     }
   }
 }
