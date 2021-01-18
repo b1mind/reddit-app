@@ -48,7 +48,7 @@
       ]
     },
     "src/data/redditStore.js": {
-      "bytes": 1344,
+      "bytes": 1340,
       "imports": [
         {
           "path": "web_modules/svelte/store.js"
@@ -56,7 +56,7 @@
       ]
     },
     "src/components/Card.css": {
-      "bytes": 1839,
+      "bytes": 1910,
       "imports": []
     },
     "web_modules/gsap.js": {
@@ -64,7 +64,7 @@
       "imports": []
     },
     "src/actions.js": {
-      "bytes": 1410,
+      "bytes": 1576,
       "imports": [
         {
           "path": "web_modules/gsap.js"
@@ -72,7 +72,7 @@
       ]
     },
     "src/components/Card.js": {
-      "bytes": 7290,
+      "bytes": 7876,
       "imports": [
         {
           "path": "src/components/Card.css"
@@ -100,7 +100,7 @@
       ]
     },
     "src/App.js": {
-      "bytes": 10250,
+      "bytes": 9973,
       "imports": [
         {
           "path": "src/App.css"
@@ -172,7 +172,7 @@
           "bytesInOutput": 481
         },
         "src/data/redditStore.js": {
-          "bytesInOutput": 587
+          "bytesInOutput": 583
         },
         "src/components/Card.css": {
           "bytesInOutput": 0
@@ -181,22 +181,22 @@
           "bytesInOutput": 58469
         },
         "src/actions.js": {
-          "bytesInOutput": 526
+          "bytesInOutput": 635
         },
         "src/components/Card.js": {
-          "bytesInOutput": 2999
+          "bytesInOutput": 3228
         },
         "web_modules/svelte/transition.js": {
           "bytesInOutput": 444
         },
         "src/App.js": {
-          "bytesInOutput": 3449
+          "bytesInOutput": 3353
         },
         "src/index.js": {
           "bytesInOutput": 122
         }
       },
-      "bytes": 75467
+      "bytes": 75705
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
@@ -205,10 +205,10 @@
           "bytesInOutput": 1147
         },
         "src/components/Card.css": {
-          "bytesInOutput": 1830
+          "bytesInOutput": 1899
         }
       },
-      "bytes": 2978
+      "bytes": 3047
     }
   }
 }
