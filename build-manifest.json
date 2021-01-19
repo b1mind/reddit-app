@@ -64,7 +64,7 @@
       "imports": []
     },
     "src/actions.js": {
-      "bytes": 2053,
+      "bytes": 2116,
       "imports": [
         {
           "path": "web_modules/gsap.js"
@@ -72,7 +72,7 @@
       ]
     },
     "src/components/Card.js": {
-      "bytes": 9256,
+      "bytes": 9250,
       "imports": [
         {
           "path": "src/components/Card.css"
@@ -181,10 +181,10 @@
           "bytesInOutput": 58513
         },
         "src/actions.js": {
-          "bytesInOutput": 842
+          "bytesInOutput": 812
         },
         "src/components/Card.js": {
-          "bytesInOutput": 3679
+          "bytesInOutput": 3708
         },
         "web_modules/svelte/transition.js": {
           "bytesInOutput": 444
@@ -196,7 +196,7 @@
           "bytesInOutput": 122
         }
       },
-      "bytes": 77194
+      "bytes": 77193
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
