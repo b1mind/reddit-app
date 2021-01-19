@@ -1,14 +1,16 @@
 <script>
+  import { actionLocalStorage } from './actions'
   import { flip } from 'svelte/animate'
   import { redditGroup, redditPostData } from './data/redditStore'
   import Card from './components/Card.svelte'
   import { fade, fly } from 'svelte/transition'
+  import { afterUpdate, beforeUpdate, onDestroy } from 'svelte'
 
   let orderUps = true
   let hide = false
   let seenPosts = []
 
-  const isEmpty = (object) => object.length === 0
+  const isEmpty = (object) => object.length <= 0
   const dateOptions = {
     // weekday: 'short',
     day: 'numeric',
@@ -19,6 +21,15 @@
   $: showSeen = true
   $: showFavorites = true
   $: posts = $redditPostData
+  $: postCount = posts.length
+
+  afterUpdate((e) => {
+    //fixme: update on date not in storage?
+
+    if (!isEmpty($redditPostData)) {
+      actionLocalStorage('replace', 'resents', $redditPostData, false)
+    }
+  })
 
   function orderByUps() {
     if (orderUps) {
@@ -68,7 +79,7 @@
 </script>
 
 <header>
-  <h1>/r/{redditGroup}</h1>
+  <h1>/r/{redditGroup} <b>({postCount})</b></h1>
 
   <nav>
     <button on:click={orderByUps}> 🔼 </button>
@@ -108,11 +119,15 @@
   {#if isEmpty(posts) && !showSeen}
     <!-- //todo: animate something... better loader and seenAll -->
 
-    <div class="msg" in:fly={{ y: 30 }}>You have seen all posts</div>
+    <div class="msg" in:fly={{ y: 30 }}>
+      You have seen all posts <a href="#0">Refresh</a>
+    </div>
   {:else if isEmpty(posts) && !showFavorites}
-    <div class="msg" in:fly={{ y: 30 }}>You have no favorites saved</div>
+    <div class="msg" in:fly={{ y: 30 }}>
+      You have no favorites saved <a href="#0">Refresh</a>
+    </div>
   {:else if isEmpty(posts)}
-    <div class="loading" />
+    <div class="loading"><div class="loading-two" /></div>
   {/if}
 </main>
 
@@ -133,7 +148,17 @@
     align-items: center;
 
     h1 {
+      position: relative;
       font-size: 1.5rem;
+      b {
+        position: absolute;
+        top: -50%;
+        right: -2ch;
+        color: var(--clr-grey);
+        font-size: 3rem;
+        opacity: 0.25;
+        z-index: -1;
+      }
     }
   }
 
@@ -177,26 +202,40 @@
     text-align: center;
   }
 
+  //fixme: gsap loader animation
   .loading {
+    position: relative;
     width: 75px;
     height: 75px;
     border: 8px dashed var(--clr-dark);
     border-radius: 50%;
+    border-top: 3px dashed transparent;
+    border-bottom: 3px dashed transparent;
     transform-origin: 'center center';
+    display: grid;
     grid-area: 1 / 1 / span 4 / span 4;
     place-self: center;
-    animation: rotate 1.5s linear infinite;
+    animation: rotate 1.15s linear infinite;
+    &-two {
+      @extend .loading;
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      border: 5px dashed var(--clr);
+      border-right: 5px dashed transparent;
+      border-left: 5px dashed transparent;
+      z-index: 20;
+    }
   }
 
-  footer {
-    height: 150px;
-  }
-
-  //fixme: gsap loader animation
   @keyframes rotate {
     to {
       transform: rotate(360deg);
     }
+  }
+
+  footer {
+    height: 150px;
   }
 
   //< end me
