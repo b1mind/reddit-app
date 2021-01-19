@@ -14,7 +14,6 @@ export function animate(node, { type, ...args }) {
 
 export function killTimeline(timeline) {
   const targets = timeline.getChildren()
-
   timeline.kill()
 
   for (let i = 0; i < targets.length; i++) {
@@ -50,11 +49,22 @@ export function copyImage(url) {
   document.execCommand('Copy')
 }
 
-export function storeInLocalStorage(item, keyAndValue, overWrite) {
-  let data = localStorage.getItem(item)
-  data = data ? JSON.parse(data) : []
+export function kFormatter(num) {
+  return Math.abs(num) > 999
+    ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
+    : Math.sign(num) * Math.abs(num)
+}
 
-  if (overWrite && data.includes(keyAndValue)) return
-  data.push(keyAndValue)
-  localStorage.setItem(item, JSON.stringify(data))
+export function storeInLocalStorage(item, keyAndValue, allowDuplicate) {
+  const data = localStorage.getItem(item)
+  let dataObj = data ? JSON.parse(data) : []
+
+  if (dataObj.length > 0) {
+    if (!allowDuplicate && (data.includes(keyAndValue.id) || data.includes(keyAndValue)))
+      return
+  }
+
+  dataObj = [keyAndValue, ...dataObj]
+  // dataObj.push(keyAndValue)
+  localStorage.setItem(item, JSON.stringify(dataObj))
 }
