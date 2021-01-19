@@ -27,7 +27,7 @@
     //fixme: update on date not in storage?
 
     if (!isEmpty($redditPostData)) {
-      actionLocalStorage('replace', 'resents', $redditPostData, false)
+      actionLocalStorage('replace', 'recent', $redditPostData, false)
     }
   })
 
