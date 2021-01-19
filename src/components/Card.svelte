@@ -1,12 +1,6 @@
 <script>
   import { gsap } from 'gsap'
-  import {
-    killTimeline,
-    storeInLocalStorage,
-    copyUrl,
-    kFormatter,
-    removeFromLocalStorage,
-  } from '../actions.js'
+  import { killTimeline, actionLocalStorage, copyUrl, kFormatter } from '../actions.js'
 
   //< props
   export let imgUrl
@@ -18,8 +12,9 @@
   export let hide = false
 
   let isToggled
-  let dataUpsIcon = ups > 2000 ? '🔥' : ups > 750 ? '🤣' : ups > 250 ? '😂' : '🌱'
+  let dataUpsIcon = ups > 2000 ? '🔥' : ups > 750 ? '🤣' : ups > 100 ? '😂' : '🌱'
   let btnIcon = dataUpsIcon
+
   $: favoriteIcon = !fav ? '🤍' : '💖'
 
   //todo: refactor localStorage and seen logic out of component
@@ -37,9 +32,9 @@
 
     if (isToggled) {
       btnIcon = dataUpsIcon
+      killTimeline(tlCopy)
 
       killTimeline(tlAnimate)
-      // killTimeline(tlCopy)
       isToggled = false
       return
     }
@@ -63,7 +58,7 @@
     const id = captionChildren[0].dataset.id
     const btn = captionChildren[2]
 
-    storeInLocalStorage('hasSeen', id, false)
+    actionLocalStorage('save', 'hasSeen', id, false)
 
     //> start timeline
     tlAnimate
@@ -129,11 +124,12 @@
   function storeFav() {
     if (fav) {
       //todo: remove fav if already favorite
-      removeFromLocalStorage('favorites', { id: id })
+      actionLocalStorage('remove', 'favorites', { id: id })
     } else {
       const orgDate = Date.parse(date) / 1000
 
-      storeInLocalStorage(
+      actionLocalStorage(
+        'save',
         'favorites',
         { id, imgUrl, title, author: 'saved', created: orgDate, ups },
         false,

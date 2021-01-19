@@ -55,28 +55,28 @@ export function kFormatter(num) {
     : Math.sign(num) * Math.abs(num)
 }
 
-//note: refactor a function for local store object
-export function storeInLocalStorage(item, object, allowDuplicate) {
+export function actionLocalStorage(action, item, object, allowDupe) {
   const data = localStorage.getItem(item)
   let dataObj = data ? JSON.parse(data) : []
 
-  if (dataObj.length > 0) {
-    if (!allowDuplicate && (data.includes(object.id) || data.includes(object))) return
-  }
+  if (action === 'save') {
+    if (dataObj.length > 0) {
+      if (!allowDupe && (data.includes(object.id) || data.includes(object))) return
+    }
 
-  dataObj = [object, ...dataObj]
-  localStorage.setItem(item, JSON.stringify(dataObj))
-}
+    dataObj = [object, ...dataObj]
+    localStorage.setItem(item, JSON.stringify(dataObj))
+  } else if (action === 'remove') {
+    if (dataObj.length > 0) {
+      if (data.includes(object.id)) {
+        dataObj = dataObj.filter((key) => key.id !== object.id)
 
-export function removeFromLocalStorage(item, object) {
-  const data = localStorage.getItem(item)
-  let dataObj = data ? JSON.parse(data) : []
-
-  if (dataObj.length > 0) {
-    if (data.includes(object.id)) {
-      dataObj = dataObj.filter((key) => key.id !== object.id)
-
-      localStorage.setItem(item, JSON.stringify(dataObj))
+        localStorage.setItem(item, JSON.stringify(dataObj))
+      }
     }
   }
 }
+
+export function storeInLocalStorage(item, object, allowDupe) {}
+
+export function removeFromLocalStorage(item, object) {}
