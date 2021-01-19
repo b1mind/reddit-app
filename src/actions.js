@@ -55,16 +55,28 @@ export function kFormatter(num) {
     : Math.sign(num) * Math.abs(num)
 }
 
-export function storeInLocalStorage(item, keyAndValue, allowDuplicate) {
+//note: refactor a function for local store object
+export function storeInLocalStorage(item, object, allowDuplicate) {
   const data = localStorage.getItem(item)
   let dataObj = data ? JSON.parse(data) : []
 
   if (dataObj.length > 0) {
-    if (!allowDuplicate && (data.includes(keyAndValue.id) || data.includes(keyAndValue)))
-      return
+    if (!allowDuplicate && (data.includes(object.id) || data.includes(object))) return
   }
 
-  dataObj = [keyAndValue, ...dataObj]
-  // dataObj.push(keyAndValue)
+  dataObj = [object, ...dataObj]
   localStorage.setItem(item, JSON.stringify(dataObj))
+}
+
+export function removeFromLocalStorage(item, object) {
+  const data = localStorage.getItem(item)
+  let dataObj = data ? JSON.parse(data) : []
+
+  if (dataObj.length > 0) {
+    if (data.includes(object.id)) {
+      dataObj = dataObj.filter((key) => key.id !== object.id)
+
+      localStorage.setItem(item, JSON.stringify(dataObj))
+    }
+  }
 }

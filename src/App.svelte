@@ -8,6 +8,7 @@
   let hide = false
   let seenPosts = []
 
+  const isEmpty = (object) => object.length === 0
   const dateOptions = {
     // weekday: 'short',
     day: 'numeric',
@@ -33,7 +34,6 @@
     posts = posts.sort((a, b) => b.created - a.created)
   }
 
-  //note: seen refactored ... it fucking it works '💪'!
   //todo: toggle change if seenPosts.length changes
   function toggleSeen() {
     seenPosts = document.querySelectorAll('.seen')
@@ -54,7 +54,6 @@
     let data = localStorage.getItem('favorites')
     let favorites = data ? JSON.parse(data) : []
 
-    // if (favorites.length > 0) return
     if (showFavorites) {
       posts = favorites
     } else {
@@ -64,6 +63,7 @@
     showFavorites = !showFavorites
     showSeen = true
   }
+
   //
 </script>
 
@@ -71,10 +71,14 @@
   <h1>/r/{redditGroup}</h1>
 
   <nav>
-    <button on:click={orderByUps}>🔼</button>
-    <button on:click={orderByRecent}>📅</button>
-    <button on:click={toggleFavorites}>{!showFavorites ? '🤍' : '💖'}</button>
-    <button on:click={toggleSeen}>{!showSeen ? '👁' : '🙈'}</button>
+    <button on:click={orderByUps}> 🔼 </button>
+    <button on:click={orderByRecent}> 📅 </button>
+    <button on:click={toggleFavorites}>
+      {!showFavorites ? '🤍' : '💖'}
+    </button>
+    <button disabled={!showFavorites} on:click={toggleSeen}>
+      {!showSeen ? '👁' : '🙈'}
+    </button>
   </nav>
 </header>
 
@@ -101,13 +105,13 @@
     </article>
   {/each}
 
-  {#if posts.length === 0 && !showSeen}
+  {#if isEmpty(posts) && !showSeen}
     <!-- //todo: animate something... better loader and seenAll -->
 
     <div class="msg" in:fly={{ y: 30 }}>You have seen all posts</div>
-  {:else if posts.length === 0 && !showFavorites}
+  {:else if isEmpty(posts) && !showFavorites}
     <div class="msg" in:fly={{ y: 30 }}>You have no favorites saved</div>
-  {:else if posts.length === 0}
+  {:else if isEmpty(posts)}
     <div class="loading" />
   {/if}
 </main>
@@ -174,14 +178,14 @@
   }
 
   .loading {
-    width: 100px;
-    height: 100px;
-    border: 10px dotted var(--clr-dark);
+    width: 75px;
+    height: 75px;
+    border: 8px dashed var(--clr-dark);
     border-radius: 50%;
     transform-origin: 'center center';
-    grid-area: 1 / span 4;
+    grid-area: 1 / 1 / span 4 / span 4;
     place-self: center;
-    animation: rotate 0.5s linear infinite;
+    animation: rotate 1.5s linear infinite;
   }
 
   footer {

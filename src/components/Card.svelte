@@ -1,6 +1,12 @@
 <script>
   import { gsap } from 'gsap'
-  import { killTimeline, storeInLocalStorage, copyUrl, kFormatter } from '../actions.js'
+  import {
+    killTimeline,
+    storeInLocalStorage,
+    copyUrl,
+    kFormatter,
+    removeFromLocalStorage,
+  } from '../actions.js'
 
   //< props
   export let imgUrl
@@ -111,8 +117,6 @@
 
   function copyImgUrl(e) {
     if (!isToggled) return
-
-    // storeFav(e.target)
     copyUrl(imgUrl)
 
     tlCopy
@@ -123,16 +127,20 @@
   }
 
   function storeFav() {
-    //todo: remove fav if already favorite
+    if (fav) {
+      //todo: remove fav if already favorite
+      removeFromLocalStorage('favorites', { id: id })
+    } else {
+      const orgDate = Date.parse(date) / 1000
+
+      storeInLocalStorage(
+        'favorites',
+        { id, imgUrl, title, author: 'saved', created: orgDate, ups },
+        false,
+      )
+    }
 
     fav = !fav
-    const orgDate = Date.parse(date) / 1000
-
-    storeInLocalStorage(
-      'favorites',
-      { id, imgUrl, title, author: 'saved', created: orgDate, ups },
-      false,
-    )
   }
 
   //end the fun
@@ -142,7 +150,9 @@
 <figure class:hide class="card">
   <div class="thumbnail" on:click={cardAnimate}>
     <img src={imgUrl} alt={title} loading="lazy" />
-    <div class="favorite" on:click={storeFav}>{favoriteIcon}</div>
+    <button disabled={!isToggled} class="favorite" on:click={storeFav}>
+      {favoriteIcon}
+    </button>
   </div>
 
   <figcaption data-ups={dataUpsIcon}>
@@ -194,7 +204,10 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    margin: 0;
     padding: 0.5rem;
+    background-color: transparent;
+    border: transparent;
     cursor: pointer;
   }
 
