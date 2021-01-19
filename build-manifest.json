@@ -172,7 +172,7 @@
           "bytesInOutput": 481
         },
         "src/data/redditStore.js": {
-          "bytesInOutput": 583
+          "bytesInOutput": 535
         },
         "src/components/Card.css": {
           "bytesInOutput": 0
@@ -196,7 +196,7 @@
           "bytesInOutput": 122
         }
       },
-      "bytes": 77241
+      "bytes": 77194
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
