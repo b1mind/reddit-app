@@ -64,7 +64,7 @@
       "imports": []
     },
     "src/actions.js": {
-      "bytes": 2116,
+      "bytes": 2064,
       "imports": [
         {
           "path": "web_modules/gsap.js"
@@ -172,7 +172,7 @@
           "bytesInOutput": 481
         },
         "src/data/redditStore.js": {
-          "bytesInOutput": 535
+          "bytesInOutput": 583
         },
         "src/components/Card.css": {
           "bytesInOutput": 0
@@ -196,7 +196,7 @@
           "bytesInOutput": 122
         }
       },
-      "bytes": 77193
+      "bytes": 77240
     },
     "../node_modules/.cache/snowpack/~~bundle~~/src/index.css": {
       "imports": [],
