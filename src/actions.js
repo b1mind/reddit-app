@@ -59,24 +59,29 @@ export function actionLocalStorage(action, item, object, allowDupe) {
   const data = localStorage.getItem(item)
   let dataObj = data ? JSON.parse(data) : []
 
-  if (action === 'save') {
-    if (dataObj.length > 0) {
-      if (!allowDupe && (data.includes(object.id) || data.includes(object))) return
-    }
+  switch (action) {
+    case 'replace':
+      localStorage.setItem(item, JSON.stringify(object))
+      break
 
-    dataObj = [object, ...dataObj]
-    localStorage.setItem(item, JSON.stringify(dataObj))
-  } else if (action === 'remove') {
-    if (dataObj.length > 0) {
-      if (data.includes(object.id)) {
-        dataObj = dataObj.filter((key) => key.id !== object.id)
+    case 'read':
+      break
 
-        localStorage.setItem(item, JSON.stringify(dataObj))
+    case 'save':
+      if (dataObj.length > 0) {
+        if (!allowDupe && (data.includes(object.id) || data.includes(object))) return
       }
-    }
+      dataObj = [object, ...dataObj]
+      localStorage.setItem(item, JSON.stringify(dataObj))
+      break
+
+    case 'remove':
+      if (dataObj.length > 0) {
+        if (data.includes(object.id)) {
+          dataObj = dataObj.filter((key) => key.id !== object.id)
+          localStorage.setItem(item, JSON.stringify(dataObj))
+        }
+      }
+      break
   }
 }
-
-export function storeInLocalStorage(item, object, allowDupe) {}
-
-export function removeFromLocalStorage(item, object) {}
