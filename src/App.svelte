@@ -2,18 +2,28 @@
   import { flip } from 'svelte/animate'
   import { redditGroup, redditPostData } from './data/redditStore'
   import Card from './components/Card.svelte'
+  import { fade, fly } from 'svelte/transition'
 
-  let showSeen = true
   let orderUps = true
   let hide = false
   let seenPosts = []
+
+  const dateOptions = {
+    // weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: '2-digit',
+  }
+
+  $: showSeen = true
+  $: showFavorites = true
   $: posts = $redditPostData
 
   function orderByUps() {
     if (orderUps) {
-      posts = posts.sort((a, b) => b.upVotes - a.upVotes)
+      posts = posts.sort((a, b) => b.ups - a.ups)
     } else {
-      posts = posts.sort((a, b) => a.upVotes - b.upVotes)
+      posts = posts.sort((a, b) => a.ups - b.ups)
     }
 
     orderUps = !orderUps
@@ -24,6 +34,7 @@
   }
 
   //note: seen refactored ... it fucking it works '💪'!
+  //todo: toggle change if seenPosts.length changes
   function toggleSeen() {
     seenPosts = document.querySelectorAll('.seen')
 
@@ -36,8 +47,23 @@
     }
 
     showSeen = !showSeen
+    showFavorites = true
   }
 
+  function toggleFavorites() {
+    let data = localStorage.getItem('favorites')
+    let favorites = data ? JSON.parse(data) : []
+
+    // if (favorites.length > 0) return
+    if (showFavorites) {
+      posts = favorites
+    } else {
+      posts = $redditPostData
+    }
+
+    showFavorites = !showFavorites
+    showSeen = true
+  }
   //
 </script>
 
@@ -47,6 +73,7 @@
   <nav>
     <button on:click={orderByUps}>🔼</button>
     <button on:click={orderByRecent}>📅</button>
+    <button on:click={toggleFavorites}>{!showFavorites ? '🤍' : '💖'}</button>
     <button on:click={toggleSeen}>{!showSeen ? '👁' : '🙈'}</button>
   </nav>
 </header>
@@ -54,25 +81,38 @@
 <main>
   <!-- //Todo: Flip refactor: look into using gsap.Flip -->
 
-  {#each posts as post (post.id)}
-    <article animate:flip={{ duration: 550 }} class="noClass">
+  <!-- {#each posts as post (post.id)} -->
+  {#each posts as { id, imgUrl, ups, author, title, created, msg }, dex (id)}
+    <article
+      class="noClass"
+      animate:flip={{ duration: 500 }}
+      in:fade={{ delay: dex * 70 }}
+      out:fly={{ y: 200 }}
+    >
       <Card
-        id={post.id}
-        imgUrl={post.img}
-        ups={post.upVotes}
-        author={post.author}
-        title={post.title}
+        {id}
+        {imgUrl}
+        {ups}
+        {author}
+        {title}
         {hide}
-        date={new Date(post.created * 1000).toDateString()} />
+        date={new Date(created * 1000).toLocaleDateString('en-US', dateOptions)}
+      />
     </article>
   {/each}
 
   {#if posts.length === 0 && !showSeen}
-    <div class="msg">You have seen all posts</div>
+    <!-- //todo: animate something... better loader and seenAll -->
+
+    <div class="msg" in:fly={{ y: 30 }}>You have seen all posts</div>
+  {:else if posts.length === 0 && !showFavorites}
+    <div class="msg" in:fly={{ y: 30 }}>You have no favorites saved</div>
   {:else if posts.length === 0}
     <div class="loading" />
   {/if}
 </main>
+
+<footer />
 
 <style lang="scss">
   //< style more
@@ -96,7 +136,7 @@
   nav {
     padding: 0.5rem 1rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 0.25rem;
     place-content: end;
     border-radius: 1rem 0 0 0;
@@ -138,10 +178,17 @@
     height: 100px;
     border: 10px dotted var(--clr-dark);
     border-radius: 50%;
-    transform-origin: ' top';
+    transform-origin: 'center center';
+    grid-area: 1 / span 4;
+    place-self: center;
     animation: rotate 0.5s linear infinite;
   }
 
+  footer {
+    height: 150px;
+  }
+
+  //fixme: gsap loader animation
   @keyframes rotate {
     to {
       transform: rotate(360deg);

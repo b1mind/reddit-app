@@ -1,6 +1,6 @@
 <script>
   import { gsap } from 'gsap'
-  import { killTimeline, storeInLocalStorage, copyUrl } from '../actions.js'
+  import { killTimeline, storeInLocalStorage, copyUrl, kFormatter } from '../actions.js'
 
   //< props
   export let imgUrl
@@ -12,19 +12,25 @@
   export let hide = false
 
   let isToggled
-  let dataUpsEmoji = ups > 5000 ? '🔥' : ups > 500 ? '🤣' : ups > 100 ? '😂' : '🌱'
-  let btnIcon = dataUpsEmoji
+  let dataUpsIcon = ups > 2000 ? '🔥' : ups > 750 ? '🤣' : ups > 250 ? '😂' : '🌱'
+  let btnIcon = dataUpsIcon
+  $: favoriteIcon = !fav ? '🤍' : '💖'
 
-  //todo: localStorage and seen logic out of component
-  let lastSeen = JSON.parse(localStorage.getItem('hasSeen'))
+  //todo: refactor localStorage and seen logic out of component
+  let hasSeenJson = localStorage.getItem('hasSeen')
+  let lastSeen = JSON.parse(hasSeenJson)
+  let favoritesJson = localStorage.getItem('favorites')
+  let isFavorite = JSON.parse(favoritesJson)
+
   let haveSeen = lastSeen ? lastSeen.includes(id) : false
+  let fav = isFavorite ? favoritesJson.includes(id) : false
 
   //todo: make a exit animation or just kill it?
   function cardClose() {
     if (tlAnimate.isActive() || tlCopy.isActive()) return
 
     if (isToggled) {
-      btnIcon = dataUpsEmoji
+      btnIcon = dataUpsIcon
 
       killTimeline(tlAnimate)
       // killTimeline(tlCopy)
@@ -50,9 +56,8 @@
     const captionChildren = caption.children
     const id = captionChildren[0].dataset.id
     const btn = captionChildren[2]
-    console.dir(captionChildren)
 
-    storeInLocalStorage('hasSeen', id, true)
+    storeInLocalStorage('hasSeen', id, false)
 
     //> start timeline
     tlAnimate
@@ -73,7 +78,8 @@
           scale: 0.5,
           borderRadius: '0 0 0 2rem',
           transformOrigin: '100% 0',
-          ease: 'back.in(1.7)',
+          cursor: 'pointer',
+          ease: 'back.inOut(1.7)',
         },
         '<',
       )
@@ -81,13 +87,13 @@
       .to(
         thumbnail,
         {
-          duration: 0.2,
+          duration: (height / 30000) * 2,
           position: 'absolute',
           duration: 1,
           height: height,
-          opacity: 1,
+          opacity: 0.9,
           cursor: 'inherit',
-          ease: 'back.in(1.7)',
+          ease: 'power3.out',
         },
         'start',
       )
@@ -104,17 +110,29 @@
   })
 
   function copyImgUrl(e) {
-    console.dir(e.target)
-    let { parentElement: caption } = e.target
-    console.log(caption)
-
     if (!isToggled) return
+
+    // storeFav(e.target)
     copyUrl(imgUrl)
+
     tlCopy
       .to(e.target.nextElementSibling, { x: -71 })
       .to(e.target, { x: -71 }, '<')
       .to(e.target, { x: 0 }, '+=0.25')
       .to(e.target.nextElementSibling, { x: 0 }, '<')
+  }
+
+  function storeFav() {
+    //todo: remove fav if already favorite
+
+    fav = !fav
+    const orgDate = Date.parse(date) / 1000
+
+    storeInLocalStorage(
+      'favorites',
+      { id, imgUrl, title, author: 'saved', created: orgDate, ups },
+      false,
+    )
   }
 
   //end the fun
@@ -124,11 +142,12 @@
 <figure class:hide class="card">
   <div class="thumbnail" on:click={cardAnimate}>
     <img src={imgUrl} alt={title} loading="lazy" />
+    <div class="favorite" on:click={storeFav}>{favoriteIcon}</div>
   </div>
 
-  <figcaption data-ups={dataUpsEmoji}>
+  <figcaption data-ups={dataUpsIcon}>
     <h2 class:seen={haveSeen} data-id={id}>{title}</h2>
-    <i>{author} // {date}</i>
+    <i>{author} <b> | </b> {date} <b> | </b> 👍 {kFormatter(ups)}</i>
     <button class="data-ups" on:click={copyImgUrl}>{btnIcon}</button>
     <div class="copy-text"><span>Copied</span></div>
   </figcaption>
@@ -171,6 +190,14 @@
     }
   }
 
+  .favorite {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
   figcaption {
     position: absolute;
     width: 100%;
@@ -187,6 +214,12 @@
       color: var(--clr-grey);
       background-color: var(--clr-two-dark);
       border-radius: 0 0 2rem 0;
+    }
+
+    b {
+      margin: 0 0.25ch;
+      color: var(--clr-two);
+      text-shadow: 0.5px 0.2px 1px grey;
     }
 
     h2 {

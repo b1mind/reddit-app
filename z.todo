@@ -1,16 +1,22 @@
 Todo:
   ☐ style menu and buttons ( mobile bottom )
-  ☐ add copy menu - link - image - save - goto orginal
-  ☐ loading icon or animation
-  ☐ add and test easing on animations
+  ☐ hide buttons when click image
+  ☐ remove favorites on toggle
 
 WishList:
+  ☐ remake animation for seen all
+  ☐ add copy menu - link - image - save favorites - goto orginal
   ☐ better header with animated order text
   ☐ have seen button toggle on length or reactivly filter
   ☐ proper overlay with bind:click passed through component to App.svelte
   ☐ add scroll trigger with lazy load?
 
 Archive:
+  ✔ remake buttons for favorites @done(21-01-18 21:14) @project(Todo)
+  ✔ working favorites with local storage @done(21-01-18 21:15) @project(Todo)
+  ✔ add favorites @done(21-01-18 00:35) @project(Todo)
+  ✔ loading icon or animation @done(21-01-18 00:34) @project(Todo)
+  ✔ add and test easing on animations @done(21-01-18 00:34) @project(Todo)
   ✔ copy link working started on menu @done(21-01-16 23:29) @project(Todo)
   ✔ convert cout emjoi / copy button to element @done(21-01-16 20:10) @project(Todo)
   ✔ hasSeen working with keyed each @done(21-01-16 19:54) @project(Todo)

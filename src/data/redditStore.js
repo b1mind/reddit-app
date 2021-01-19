@@ -24,11 +24,11 @@ export const redditPostData = readable([], async (set) => {
       if (isValidImageUrl(data.url)) {
         const post = {
           id: data.id,
-          img: data.url,
+          imgUrl: data.url,
           thumb: data.thumbnail,
           title: data.title,
           created: data.created,
-          upVotes: data.ups,
+          ups: data.ups,
           author: data.author,
         }
 
@@ -43,5 +43,6 @@ export const redditPostData = readable([], async (set) => {
     const msg = '💩 something messed up'
 
     console.error(msg, err)
+    set(msg)
   }
 })
