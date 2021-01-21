@@ -1,7 +1,9 @@
 Todo:
   ☐ style menu and buttons ( mobile bottom )
   ☐ hide buttons when click image
-  ☐ remove favorites on toggle
+  ☐ safty toggle to remove favorites
+  ☐ save some recents to load when cores or fetch fails
+  ☐ return recents and error msg
 
 WishList:
   ☐ remake animation for seen all
