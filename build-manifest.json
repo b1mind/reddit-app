@@ -121,7 +121,7 @@
       ]
     },
     "src/App.svelte.js": {
-      "bytes": 14075,
+      "bytes": 14080,
       "imports": [
         {
           "path": "src/App.svelte.css",
