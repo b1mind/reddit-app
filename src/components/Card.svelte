@@ -88,9 +88,8 @@
       .to(
         thumbnail,
         {
-          duration: (height / 30000) * 2,
+          duration: (height / 700) * 2,
           position: 'absolute',
-          duration: 1,
           height: height,
           opacity: 0.9,
           cursor: 'inherit',
