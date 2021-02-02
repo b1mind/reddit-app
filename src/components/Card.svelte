@@ -202,6 +202,7 @@
     right: 0;
     margin: 0;
     padding: 0.5rem;
+    font-size: 1.15rem;
     background-color: transparent;
     border: transparent;
     cursor: pointer;

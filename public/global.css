@@ -17,6 +17,9 @@
   --theme-v: #e0b96b; /* FFDC96 */
   --breadcrumb: #9cd9ff;
   --bread-forGround: #64b4fa;
+  /* save to use? */
+  --purple: #19151e;
+  --purple-dark: #131016;
 }
 
 *,

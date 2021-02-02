@@ -4,7 +4,7 @@
   import { redditGroup, redditPostData } from './data/redditStore'
   import Card from './components/Card.svelte'
   import { fade, fly } from 'svelte/transition'
-  import { afterUpdate, beforeUpdate, onDestroy } from 'svelte'
+  import { afterUpdate } from 'svelte'
 
   let orderUps = true
   let hide = false
@@ -22,6 +22,10 @@
   $: showFavorites = true
   $: posts = $redditPostData
   $: postCount = posts.length
+
+  function getPostDate(created) {
+    return new Date(created * 1000).toLocaleDateString('en-US', dateOptions)
+  }
 
   afterUpdate((e) => {
     //fixme: update on date not in storage?
@@ -96,7 +100,6 @@
 <main>
   <!-- //Todo: Flip refactor: look into using gsap.Flip -->
 
-  <!-- {#each posts as post (post.id)} -->
   {#each posts as { id, imgUrl, ups, author, title, created, msg }, dex (id)}
     <article
       class="noClass"
@@ -104,27 +107,19 @@
       in:fade={{ delay: dex * 70 }}
       out:fly={{ y: 200 }}
     >
-      <Card
-        {id}
-        {imgUrl}
-        {ups}
-        {author}
-        {title}
-        {hide}
-        date={new Date(created * 1000).toLocaleDateString('en-US', dateOptions)}
-      />
+      <Card {id} {imgUrl} {ups} {author} {title} {hide} date={getPostDate(created)} />
     </article>
   {/each}
 
   {#if isEmpty(posts) && !showSeen}
-    <!-- //todo: animate something... better loader and seenAll -->
-
     <div class="msg" in:fly={{ y: 30 }}>
-      You have seen all posts <a href="#0">Refresh</a>
+      You have seen all posts
+      <button on:click={toggleSeen}> view posts </button>
     </div>
   {:else if isEmpty(posts) && !showFavorites}
     <div class="msg" in:fly={{ y: 30 }}>
-      You have no favorites saved <a href="#0">Refresh</a>
+      You have no favorites saved
+      <button on:click={toggleFavorites}> view posts </button>
     </div>
   {:else if isEmpty(posts)}
     <div class="loading"><div class="loading-two" /></div>
@@ -146,6 +141,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid var(--clr);
 
     h1 {
       position: relative;
@@ -170,6 +166,12 @@
     place-content: end;
     border-radius: 1rem 0 0 0;
 
+    button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
     @media (max-width: $min) {
       position: fixed;
       right: 0;
@@ -178,12 +180,6 @@
       background-color: var(--clr-bg);
       z-index: 9999;
     }
-  }
-
-  button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
   }
 
   main {
