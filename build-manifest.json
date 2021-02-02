@@ -78,7 +78,7 @@
       "imports": []
     },
     "src/components/Card.svelte.js": {
-      "bytes": 9260,
+      "bytes": 9241,
       "imports": [
         {
           "path": "src/components/Card.svelte.css",
@@ -221,7 +221,7 @@
           "bytesInOutput": 0
         },
         "src/components/Card.svelte.js": {
-          "bytesInOutput": 3684
+          "bytesInOutput": 3673
         },
         "_snowpack/pkg/svelte/transition.js": {
           "bytesInOutput": 450
@@ -236,7 +236,7 @@
           "bytesInOutput": 64
         }
       },
-      "bytes": 79252
+      "bytes": 79241
     },
     "../~~bundle~~/src/index.css": {
       "imports": [],
