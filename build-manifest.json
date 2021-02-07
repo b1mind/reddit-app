@@ -215,7 +215,7 @@
           "bytesInOutput": 481
         },
         "src/data/redditStore.js": {
-          "bytesInOutput": 564
+          "bytesInOutput": 521
         },
         "src/components/Card.svelte.css": {
           "bytesInOutput": 0
@@ -236,7 +236,7 @@
           "bytesInOutput": 64
         }
       },
-      "bytes": 79241
+      "bytes": 79198
     },
     "../~~bundle~~/src/index.css": {
       "imports": [],
