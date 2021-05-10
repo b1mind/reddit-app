@@ -26,7 +26,7 @@
   let haveSeen = lastSeen ? lastSeen.includes(id) : false
   let fav = isFavorite ? favoritesJson.includes(id) : false
 
-  //todo: make a exit animation or just kill it?
+  //todo: make a close animation or just kill it?
   function cardClose() {
     if (tlAnimate.isActive() || tlCopy.isActive()) return
 
@@ -123,6 +123,7 @@
   function storeFav() {
     if (fav) {
       //todo: remove fav if already favorite
+
       actionLocalStorage('remove', 'favorites', { id: id })
     } else {
       const orgDate = Date.parse(date) / 1000

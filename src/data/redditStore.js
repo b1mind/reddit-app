@@ -1,11 +1,10 @@
 import { readable } from 'svelte/store'
 
 export const redditGroup = 'ProgrammerHumor'
-// export const redditGroup2 = 'ProgrammingHumor'
 
+//? need to either get a key to use cores anywhere now or host my own?
 const CORS = 'https://cors-anywhere.herokuapp.com/'
 const API = `https://www.reddit.com/r/${redditGroup}/.json`
-// const API2 = `https://www.reddit.com/r/${redditGroup2}/.json`
 
 const isValidImageUrl = (url) => {
   if ((!url && typeof url !== 'string') || url.length === 0) return
@@ -17,8 +16,8 @@ const isValidImageUrl = (url) => {
 //Todo make fetch a function to call and make derived url?
 export const redditPostData = readable([], async (set) => {
   try {
-    const response = await fetch(`${CORS}${API}`)
-    // const response = await fetch(`${API}`)
+    // const response = await fetch(`${CORS}${API}`)
+    const response = await fetch(`${API}`)
     const results = await response.json()
 
     console.dir(results.data.children)

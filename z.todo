@@ -1,15 +1,20 @@
 Todo:
+  ☐ don't animate height , need clip or ?
   ☐ style menu and buttons ( mobile bottom )
-  ☐ hide buttons when click image
-  ☐ safty toggle to remove favorites
-  ☐ save some recents to load when cores or fetch fails
-  ☐ return recents and error msg
+  ☐ hide menu when click image
+  ☐ safety toggle to remove favorites like confirm y/n?
+  ☐ save some recent to load when cores or fetch fails or fav fall back?
+  ☐ return recent and error msg
+  ☐ max char limit for desc
+  ☐ close button after card animation
+  ☐ hide seen by default
+
 
 WishList:
   ☐ remake animation for seen all
-  ☐ add copy menu - link - image - save favorites - goto orginal
+  ☐ add copy menu - link - image - save favorites - goto original
   ☐ better header with animated order text
-  ☐ have seen button toggle on length or reactivly filter
+  ☐ have seen button toggle on length or reactively filter (hide new seen)
   ☐ proper overlay with bind:click passed through component to App.svelte
   ☐ add scroll trigger with lazy load?
 
@@ -20,7 +25,7 @@ Archive:
   ✔ loading icon or animation @done(21-01-18 00:34) @project(Todo)
   ✔ add and test easing on animations @done(21-01-18 00:34) @project(Todo)
   ✔ copy link working started on menu @done(21-01-16 23:29) @project(Todo)
-  ✔ convert cout emjoi / copy button to element @done(21-01-16 20:10) @project(Todo)
+  ✔ convert count emoji / copy button to element @done(21-01-16 20:10) @project(Todo)
   ✔ hasSeen working with keyed each @done(21-01-16 19:54) @project(Todo)
   ✔ once moved rename and make proper header @done(21-01-03 21:57) @project(Todo)
   ✔ sort functions for haveSeen/recent/popular. @done(21-01-01 23:17) @project(Todo)

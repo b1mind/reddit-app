@@ -24,7 +24,7 @@ export function killTimeline(timeline) {
 }
 
 export function copyUrl(str) {
-  var el = document.createElement('textarea')
+  const el = document.createElement('textarea')
   el.value = str
   el.setAttribute('readonly', '')
   el.style = { position: 'absolute', left: '-9999px' }
