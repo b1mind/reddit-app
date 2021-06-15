@@ -10,6 +10,7 @@
   let hide = false
   let seenPosts = []
 
+  //fixme testing
   const isEmpty = (object) => object.length <= 0
   const dateOptions = {
     // weekday: 'short',
@@ -212,6 +213,7 @@
     grid-area: 1 / 1 / span 4 / span 4;
     place-self: center;
     animation: rotate 1.15s linear infinite;
+
     &-two {
       @extend .loading;
       position: absolute;

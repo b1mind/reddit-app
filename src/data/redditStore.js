@@ -20,8 +20,6 @@ export const redditPostData = readable([], async (set) => {
     const response = await fetch(`${API}`)
     const results = await response.json()
 
-    console.dir(results.data.children)
-
     const retrievedPosts = results.data.children.reduce((posts, { data }) => {
       if (isValidImageUrl(data.url)) {
         const post = {
